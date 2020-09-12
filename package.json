@@ -61,7 +61,7 @@
     "@commitlint/cli": "9.1.2",
     "@episclera/toolkit": "1.1.0",
     "@types/jest": "26.0.13",
-    "eslint": "7.8.1",
+    "eslint": "7.9.0",
     "husky": "4.3.0",
     "jest": "26.4.2",
     "lerna": "3.22.1",

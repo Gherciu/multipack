@@ -1,6 +1,9 @@
-name: PR Check
+name: Publish
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -16,13 +19,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install, build, and test
+      - name: npm install, build, test and ci:publish
         run: |
           npm install
           npm run link:packages
           npm run build:packages
           npm run lint:packages
           npm run test:packages
+          npm run ci:publish:packages
         env:
           CI: true
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

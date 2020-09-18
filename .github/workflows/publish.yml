@@ -21,8 +21,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: npm install, ci:publish
         run: |
-          git config --global user.email "packages-publish-bot@episclera.com"
-          git config --global user.name "Packages Publish Bot"
+          git config --global user.email "episclera@episclera.com"
+          git config --global user.name "Episclera"
           npm install
           npm run ci:publish:packages
         env:

@@ -24,5 +24,4 @@ jobs:
           npm run lint:packages
           npm run test:packages
         env:
-          CI: true
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

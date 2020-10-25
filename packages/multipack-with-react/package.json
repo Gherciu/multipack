@@ -1,7 +1,7 @@
 {
   "name": "@episclera/multipack-with-react",
   "description": "An example of react multipack package",
-  "version": "5.0.9",
+  "version": "5.0.10",
   "license": "MIT",
   "publishConfig": {
     "access": "public"

@@ -1,7 +1,7 @@
 {
   "name": "@episclera/multipack-utils",
   "description": "A set of utils for multipack monorepo repository.",
-  "version": "5.0.7",
+  "version": "5.0.8",
   "license": "MIT",
   "publishConfig": {
     "access": "public"

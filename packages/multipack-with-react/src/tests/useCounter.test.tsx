@@ -1,44 +1,38 @@
 /* eslint-disable import/no-extraneous-dependencies, no-use-before-define */
-
 import React from 'react'
-import { render } from '@testing-library/react'
-import { renderHook, act } from '@testing-library/react-hooks'
+import { fireEvent, render } from '@testing-library/react'
 import useCounter from '../useCounter'
+import Counter from '../Counter'
+
+const Component: React.FC = () => {
+  const { count, increment, decrement } = useCounter(0)
+  return (
+    <div data-testid='test'>
+      <Counter count={count} onIncrement={increment} onDecrement={decrement} />
+    </div>
+  )
+}
 
 describe('useCounter', () => {
   it('should increment counter ', () => {
-    const { result } = renderHook(() => useCounter())
+    const { getByTestId } = render(<Component />)
 
-    act(() => {
-      result.current.increment()
-    })
+    fireEvent.click(getByTestId('increment'))
 
-    expect(result.current.count).toBe(1)
+    expect(getByTestId('test').innerHTML).toMatch('1')
   })
 
-  it('should return corect initial count', () => {
-    const { result } = renderHook(() => useCounter(21))
+  it('should render correct initial count', () => {
+    const { getByTestId } = render(<Component />)
 
-    expect(result.current.count).toBe(21)
+    expect(getByTestId('test').innerHTML).toMatch('0')
   })
 
   it('should decrement counter', () => {
-    const { result } = renderHook(() => useCounter())
-
-    act(() => {
-      result.current.decrement()
-    })
-
-    expect(result.current.count).toBe(-1)
-  })
-
-  it('should render corect without errors', () => {
-    const Component: React.FC = () => {
-      const { count } = useCounter(21)
-      return <div data-testid='test'>{count}</div>
-    }
     const { getByTestId } = render(<Component />)
 
-    expect(getByTestId('test').innerHTML).toMatch('21')
+    fireEvent.click(getByTestId('decrement'))
+
+    expect(getByTestId('test').innerHTML).toMatch('-1')
   })
 })

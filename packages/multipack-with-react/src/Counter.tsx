@@ -7,12 +7,12 @@ const Counter: React.FC<CounterProps> = ({
   onIncrement,
   count,
 }: CounterProps) => (
-  <div>
-    <button type='button' onClick={onDecrement}>
+  <div data-testid='counter'>
+    <button data-testid='decrement' type='button' onClick={onDecrement}>
       -
     </button>
     <span>{count}</span>
-    <button type='button' onClick={onIncrement}>
+    <button data-testid='increment' type='button' onClick={onIncrement}>
       +
     </button>
   </div>

@@ -1,25 +1,36 @@
 /* eslint-disable import/no-extraneous-dependencies, no-use-before-define */
 import React from 'react'
-import { render } from '@testing-library/react'
-import useCounter from '../useCounter'
+import { render, fireEvent } from '@testing-library/react'
 import Counter from '../Counter'
 
 describe('Counter', () => {
-  it('should render corect without errors', () => {
-    const Component: React.FC = () => {
-      const { count, increment, decrement } = useCounter(21)
-      return (
-        <div data-testid='test'>
-          <Counter
-            count={count}
-            onIncrement={increment}
-            onDecrement={decrement}
-          />
-        </div>
-      )
-    }
-    const { getByTestId } = render(<Component />)
+  it('should trigger increment method on increment btn click', () => {
+    const increment = jest.fn()
+    const { getByTestId } = render(
+      <Counter count={21} onIncrement={increment} onDecrement={() => {}} />,
+    )
 
-    expect(getByTestId('test').innerHTML).toMatch('21')
+    fireEvent.click(getByTestId('increment'))
+
+    expect(increment).toHaveBeenCalled()
+  })
+
+  it('should render correct initial count', () => {
+    const { getByTestId } = render(
+      <Counter count={21} onIncrement={() => {}} onDecrement={() => {}} />,
+    )
+
+    expect(getByTestId('counter').innerHTML).toMatch('21')
+  })
+
+  it('should trigger increment method on increment btn click', () => {
+    const decrement = jest.fn()
+    const { getByTestId } = render(
+      <Counter count={21} onIncrement={() => {}} onDecrement={decrement} />,
+    )
+
+    fireEvent.click(getByTestId('decrement'))
+
+    expect(decrement).toHaveBeenCalled()
   })
 })

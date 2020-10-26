@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react'
 import { TUseCounter } from '../types'
 
+/* istanbul ignore next (no need to test initialValue) */
 const useCounter: TUseCounter = (initialValue = 0) => {
   const [count, setCount] = useState(initialValue)
 

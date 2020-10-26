@@ -1,7 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies, no-use-before-define */
 import React from 'react'
 import { render } from '@testing-library/react'
-import '@testing-library/jest-dom'
 import useCounter from '../useCounter'
 import Counter from '../Counter'
 

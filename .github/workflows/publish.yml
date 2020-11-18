@@ -28,16 +28,16 @@ jobs:
           npm run build:packages
       - name: Pre-Publish packages
         run: |
-          npm run pre:publish:packages --yes
+          npm run pre:publish:packages
       - name: Publish to NPM
         run: |
           echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
-          npm run publish:packages --yes
+          npm run publish:packages
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish to GitHub Packages
         run: |
           echo //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN} > .npmrc
-          npm run publish:packages --yes
+          npm run publish:packages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

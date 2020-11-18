@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Setup environment
+      - name: Install dependencies and build packages
         run: |
           npm install
           npm run link:packages

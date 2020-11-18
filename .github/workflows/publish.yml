@@ -19,10 +19,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Setup environment
+      - name: Setup git user
         run: |
           git config --global user.email "actions@gihub.com"
           git config --global user.name "gh-actions"
+      - name: Install dependencies and build packages
+        run: |
           npm install
           npm run link:packages
           npm run build:packages
@@ -30,13 +32,19 @@ jobs:
         run: |
           yes | npm run pre:publish:packages
       - name: Publish to NPM
+        uses: actions/setup-node@v1
+        with:
+          registry-url: 'https://registry.npmjs.org'
         run: |
-          echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
-          yes | npm run publish:packages:npm
+          yes | npm run publish:packages
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish to GitHub Packages
+        uses: actions/setup-node@v1
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@episclera'
         run: |
-          echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" > .npmrc
-          npm login --registry=https://npm.pkg.github.com --scope=@episclera
-          yes | npm run publish:packages:gh
+          yes | npm run publish:packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

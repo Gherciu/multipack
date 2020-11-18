@@ -2,8 +2,7 @@ name: Publish
 
 on:
   push:
-    branches:
-      - master
+    branches: [$default-branch]
 
 jobs:
   build:

@@ -16,14 +16,6 @@
     "type": "git",
     "url": "https://github.com/episclera/multipack"
   },
-  "collective": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/episclera"
-  },
-  "funding": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/episclera"
-  },
   "keywords": [
     "lerna",
     "monorepo",
@@ -43,13 +35,17 @@
     "watch:test:packages": "jest --watch",
     "lint:packages": "eslint ./packages --ext .ts,.tsx --max-warnings=0",
     "fix:packages": "eslint ./packages --ext .ts,.tsx --fix --max-warnings=0",
+    "lint:packages:styles": "stylelint \"./packages/**/*.less\" --syntax=less",
+    "fix:packages:styles": "stylelint \"./packages/**/*.less\" --fix --syntax=less",
     "start:docs": "cd docs && npm run start",
-    "publish:docs": "cd docs && npm run deploy",
-    "postinstall": "opencollective-postinstall || exit 0"
+    "publish:docs": "cd docs && npm run deploy"
   },
   "lint-staged": {
     "*.(ts|tsx)": [
       "npm run lint:packages"
+    ],
+    "*.(less)": [
+      "npm run lint:packages:styles"
     ]
   },
   "husky": {
@@ -66,9 +62,7 @@
     "husky": "4.3.6",
     "jest": "26.6.3",
     "lerna": "3.22.1",
-    "lint-staged": "10.5.3"
-  },
-  "dependencies": {
-    "opencollective-postinstall": "2.0.3"
+    "lint-staged": "10.5.3",
+    "stylelint": "13.8.0"
   }
 }

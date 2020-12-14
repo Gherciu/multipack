@@ -54,6 +54,8 @@ Running `npm run link:packages` will installing all packages dependencies and li
 
 `npm run lint:packages` - lint all packages
 
+`npm run lint:packages:styles` - lint all packages styles
+
 `npm run fix:packages` - lint and fix all packages
 
 `npm run start:docs` - start a [Docusaurus](https://docusaurus.io/) server that serve files from `/docs` folder predestinated for docs.

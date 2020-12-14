@@ -24,4 +24,5 @@ jobs:
       - name: Lint and Test
         run: |
           npm run lint:packages
+          npm run lint:packages:styles
           npm run test:packages

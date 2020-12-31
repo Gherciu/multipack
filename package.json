@@ -28,7 +28,8 @@
     "build:packages": "lerna run build",
     "watch:packages": "lerna run watch --stream --parallel",
     "start:packages": "lerna run start --stream --parallel",
-    "serve:packages": "lerna run serve --stream --parallel",
+    "watch:docs": "lerna run watch --stream --scope=docs",
+    "publish:docs": "cd docs && npm run publish",
     "link:packages": "lerna bootstrap",
     "version:packages": "lerna version --yes --message=\"chore: publish changed packages\"",
     "publish:packages:npm": "lerna publish from-package --yes --registry=https://registry.npmjs.org",
@@ -38,9 +39,7 @@
     "lint:packages": "eslint ./packages --ext .ts,.tsx --max-warnings=0",
     "fix:packages": "eslint ./packages --ext .ts,.tsx --fix --max-warnings=0",
     "lint:packages:styles": "stylelint \"./packages/**/*.less\" --syntax=less",
-    "fix:packages:styles": "stylelint \"./packages/**/*.less\" --fix --syntax=less",
-    "start:docs": "cd docs && npm run start",
-    "publish:docs": "cd docs && npm run deploy"
+    "fix:packages:styles": "stylelint \"./packages/**/*.less\" --fix --syntax=less"
   },
   "lint-staged": {
     "*.(ts|tsx)": [

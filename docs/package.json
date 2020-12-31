@@ -13,10 +13,10 @@
     "url": "https://github.com/episclera/multipack"
   },
   "scripts": {
-    "start": "docusaurus start",
+    "watch": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "echo \"Please type your username for a GitHub account that has commit access to this repo.\" && read -p 'GIT_USERNAME: ' GIT_USER && cross-env GIT_USER=$GIT_USER docusaurus deploy"
+    "publish": "echo \"Please type your username for a GitHub account that has commit access to this repo.\" && read -p 'GIT_USERNAME: ' GIT_USER && cross-env GIT_USER=$GIT_USER docusaurus deploy"
   },
   "dependencies": {
     "@docusaurus/core": "2.0.0-alpha.f37987f32",

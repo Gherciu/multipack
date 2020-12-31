@@ -26,7 +26,7 @@
   },
   "scripts": {
     "build:packages": "lerna run build",
-    "watch:packages": "lerna run watch",
+    "watch:packages": "lerna run watch --stream --parallel",
     "start:packages": "lerna run start --stream --parallel",
     "serve:packages": "lerna run serve --stream --parallel",
     "link:packages": "lerna bootstrap",

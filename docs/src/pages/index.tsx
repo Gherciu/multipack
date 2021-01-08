@@ -106,7 +106,10 @@ const Home: React.FC<any> = () => {
                           preview={false}
                           className='ml-3'
                         />
-                        <Typography.Title level={4} className='text-link-color'>
+                        <Typography.Title
+                          level={4}
+                          className='text-primary-color'
+                        >
                           {title}
                         </Typography.Title>
                       </Typography.Link>

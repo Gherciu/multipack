@@ -1,3 +1,8 @@
 # Dependency directories
 node_modules/
+
+# Build directories
 **/build
+
+# Generators directories
+packages/multipack/generators/

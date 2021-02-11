@@ -31,25 +31,22 @@ Install: `npm i -g @episclera/multipack`
 
 ## Usage
 
-#### Create a new monorepo following Multipack standarts
-
-`multipack new workspace` - will ask some questions and then using that info will create and configure a new monorepo in the current working directory.
+#### `multipack new workspace` - Create a new monorepo following Multipack standarts
 
 ```sh
 ? Workspace name (e.g., name)     happyworkspace
 ? Workspace organisation name (e.g., org name)     happyorg
 ```
 
-#### Create a new package
-
-`multipack new package` - ill ask some questions and then using that info will create a new package in the `/packages` folder.
+#### `multipack new package` - Create a new package in the current workspace following Multipack standarts
 
 ```sh
-? What to create in the new workspace (Use arrow keys)
-❯  empty           [an empty package]
-   react            [an React package]
-   next             [an Next.js app]
-   strapi           [an Strapi api]
+? What to create in the workspace (Use arrow keys)
+❯  empty           [empty package]
+   cli              [CLI package]
+   react            [React package]
+   next             [Next.js app]
+   strapi           [Strapi api]
 ```
 
 ## Contributing

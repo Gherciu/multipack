@@ -3,10 +3,8 @@
   <img style="max-width:100%;" height="200"
     src="https://raw.githubusercontent.com/episclera/multipack/master/logo.png">
   </a>
-  <h1>
-      multipack
-  </h1>
-  <p> 🔱 All in one tool for monorepos.</p>
+  <h1>@episclera/multipack-with-react</h1>
+  <p>An example of react multipack package. Part of <a href="https://github.com/episclera/multipack">multipack</a> monorepo</p>
   <p>
     <a href="https://episclera.github.io/multipack/">Site</a>
     | <a href="https://episclera.github.io/multipack/docs/doc-introduction">Getting Started</a>
@@ -18,35 +16,20 @@
 [![GitHub](https://img.shields.io/github/license/episclera/multipack)](https://github.com/episclera/multipack/blob/master/LICENSE)
 [![Multipack](https://img.shields.io/badge/Generated%20from-episclera%2Fmultipack-green)](https://github.com/episclera/multipack)
 
-## Features
+## Getting started
 
-- Manage, Configure and Create monorepo projects which follows Multipack standarts.
-- Manage and configure code style linters.
-- Manage and configure test and linting processes for monorepos.
-- Manage and configure `Github workflow actions` for monorepos.
+- Install: `npm i @episclera/multipack-with-react`
 
-## Getting started.
+```js
+import React from 'react'
+import { Counter, useCounter } from '@episclera/multipack-with-react'
 
-Install: `npm i -g @episclera/multipack`
-
-## Usage
-
-#### `multipack new workspace` - Create a new monorepo following Multipack standarts
-
-```sh
-? Workspace name (e.g., name)     happyworkspace
-? Workspace organisation name (e.g., org name)     happyorg
-```
-
-#### `multipack new package` - Create a new package in the current workspace following Multipack standarts
-
-```sh
-? What to create in the workspace (Use arrow keys)
-❯  empty           [empty package]
-   cli              [CLI package]
-   react            [React package]
-   next             [Next.js app]
-   strapi           [Strapi api]
+const App = () => {
+  const { count, increment, decrement } = useCounter(0)
+  return (
+    <Counter count={count} onDecrement={decrement} onIncrement={increment} />
+  )
+}
 ```
 
 ## Contributing

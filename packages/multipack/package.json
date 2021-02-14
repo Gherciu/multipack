@@ -33,6 +33,9 @@
     "url": "https://github.com/episclera/multipack/issues"
   },
   "main": "./build/index.js",
+  "bin": {
+    "multipack": "./build/index.js"
+  },
   "types": "./types",
   "scripts": {
     "build": "rimraf ./build && cross-env NODE_ENV=production webpack",

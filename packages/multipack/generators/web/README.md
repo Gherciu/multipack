@@ -3,7 +3,7 @@
   <img style="max-width:100%;" height="200"
     src="https://raw.githubusercontent.com/episclera/multipack/master/logo.png">
   </a>
-  <h1>@episclera/multipack-with-react</h1>
+  <h1>@episclera/multipack</h1>
   <p>An example of react multipack package. Part of <a href="https://github.com/episclera/multipack">multipack</a> monorepo</p>
   <p>
     <a href="https://episclera.github.io/multipack/">Site</a>
@@ -16,21 +16,6 @@
 [![GitHub](https://img.shields.io/github/license/episclera/multipack)](https://github.com/episclera/multipack/blob/master/LICENSE)
 [![Multipack](https://img.shields.io/badge/Generated%20from-episclera%2Fmultipack-green)](https://github.com/episclera/multipack)
 
-## Getting started
-
-- Install: `npm i @episclera/multipack-with-react`
-
-```js
-import React from 'react'
-import { Counter, useCounter } from '@episclera/multipack-with-react'
-
-const App = () => {
-  const { count, increment, decrement } = useCounter(0)
-  return (
-    <Counter count={count} onDecrement={decrement} onIncrement={increment} />
-  )
-}
-```
 
 ## Contributing
 

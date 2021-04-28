@@ -25,17 +25,12 @@
     "url": "https://opencollective.com/episclera"
   },
   "keywords": [
-    "lerna",
-    "monorepo",
     "multipack"
   ],
   "bugs": {
     "url": "https://github.com/episclera/multipack/issues"
   },
   "main": "./build/index.js",
-  "bin": {
-    "multipack": "./build/index.js"
-  },
   "types": "./types",
   "scripts": {
     "build": "rimraf ./build && cross-env NODE_ENV=production webpack",
@@ -43,23 +38,27 @@
     "postinstall": "opencollective-postinstall || exit 0"
   },
   "devDependencies": {
-    "@episclera/configkit-utils": "1.4.1",
-    "@episclera/webpack-config": "1.4.1",
-    "@types/react": "17.0.4",
     "cross-env": "7.0.3",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
     "rimraf": "3.0.2",
-    "webpack": "5.36.0",
+    "ts-loader": "8.2.0",
+    "typescript": "4.2.4",
+    "webpack": "5.35.1",
     "webpack-cli": "4.6.0"
   },
   "dependencies": {
+    "@episclera/babel-config": "^1.4.1",
+    "@episclera/commitlint-config": "^1.4.1",
     "@episclera/multipack-utils": "^5.1.4",
+    "@episclera/eslint-config": "^1.4.1",
+    "@episclera/jest-config": "^1.4.1",
+    "@episclera/next-config": "^1.2.1",
+    "@episclera/next-i18next-config": "^1.2.1",
+    "@episclera/postcss-config": "^1.4.1",
+    "@episclera/prettier-config": "^1.4.1",
+    "@episclera/stylelint-config": "^1.4.1",
+    "@episclera/tailwind-config": "^1.4.1",
+    "@episclera/webpack-config": "^1.4.1",
     "opencollective-postinstall": "2.0.3"
-  },
-  "peerDependencies": {
-    "react": ">=16.13.1",
-    "react-dom": ">=16.13.1"
   },
   "gitHead": "8635a43c9abe3ab19ed07077384ebf40fbd7717c"
 }

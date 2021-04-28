@@ -1,0 +1,68 @@
+{
+  "name": "@episclera/eslint-config",
+  "description": "A shareable eslint config.",
+  "version": "1.4.1",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Episclera",
+    "email": "episclera@episclera.com",
+    "url": "https://episclera.com"
+  },
+  "homepage": "https://episclera.github.io/multipack/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/episclera/multipack"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/episclera"
+  },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/episclera"
+  },
+  "keywords": [
+    "multipack",
+    "eslint"
+  ],
+  "bugs": {
+    "url": "https://github.com/episclera/multipack/issues"
+  },
+  "main": "./build/index.js",
+  "types": "./types",
+  "scripts": {
+    "build": "rimraf ./build && cross-env NODE_ENV=production webpack",
+    "watch": "cross-env NODE_ENV=development webpack -w",
+    "postinstall": "opencollective-postinstall || exit 0"
+  },
+  "devDependencies": {
+    "@episclera/multipack-utils": "^5.1.4",
+    "@episclera/webpack-config": "^1.4.1",
+    "cross-env": "7.0.3",
+    "rimraf": "3.0.2",
+    "ts-loader": "8.2.0",
+    "webpack": "5.35.1",
+    "webpack-cli": "4.6.0"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "4.22.0",
+    "@typescript-eslint/parser": "4.22.0",
+    "babel-eslint": "10.1.0",
+    "eslint-config-airbnb": "18.2.1",
+    "eslint-config-airbnb-base": "14.2.1",
+    "eslint-config-airbnb-typescript": "12.3.1",
+    "eslint-config-prettier": "7.2.0",
+    "eslint-import-resolver-alias": "1.1.2",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jsx-a11y": "6.4.1",
+    "eslint-plugin-prettier": "3.4.0",
+    "eslint-plugin-react": "7.23.2",
+    "eslint-plugin-react-hooks": "4.2.0",
+    "opencollective-postinstall": "2.0.3",
+    "typescript": "4.2.4"
+  },
+  "gitHead": "8635a43c9abe3ab19ed07077384ebf40fbd7717c"
+}

@@ -49,6 +49,184 @@ Install: `npm i -g @episclera/multipack`
    api              [Strapi api]
 ```
 
+## Multipack shared configs usage
+
+#### With Prettier
+
+In your `.prettierrc.js` file just put this content.
+
+```js
+const { prettierConfig } = require('@episclera/multipack')
+// OR install and import just what you need separately: const prettierConfig = require('@episclera/prettier-config')
+
+module.exports = prettierConfig
+```
+
+#### With Commitlint
+
+In your `commitlint.config.js` file just put this content.
+
+```js
+const { commitlintConfig } = require('@episclera/multipack')
+// OR install and import just what you need separately: const commitlintConfig = require('@episclera/commitlint-config')
+
+module.exports = commitlintConfig
+```
+
+#### With Renovate
+
+In your `renovate.json` file just put this content. (Do not forgot to connect/install renovate app on GitHub)
+
+```json
+{
+  "extends": ["@episclera"]
+}
+```
+
+#### With Jest
+
+In your `jest.config.js` file just put this content.
+
+```js
+const { jestConfig } = require('@episclera/multipack')
+// OR install and import just what you need separately: const jestConfig = require('@episclera/jest-config')
+
+module.exports = jestConfig
+```
+
+#### With Eslint
+
+In your `.eslintrc.js` file just put this content.
+
+```js
+const { eslintConfig } = require('@episclera/multipack')
+// OR install and import just what you need separately: const eslintConfig = require('@episclera/eslint-config')
+
+module.exports = eslintConfig
+```
+
+#### With Stylelint
+
+In your `.stylelintrc.js` file just put this content.
+
+```js
+const { stylelintConfig } = require('@episclera/multipack')
+// OR install and import just what you need separately: const stylelintConfig = require('@episclera/stylelint-config')
+
+module.exports = stylelintConfig
+```
+
+#### With Babel
+
+In your `.babelrc.js` file just put this content.
+
+```js
+const { commonBabelConfig } = require('@episclera/multipack')
+// OR install and import just what you need separately: const { commonBabelConfig } = require('@episclera/babel-config')
+
+module.exports = commonBabelConfig
+
+// OR you can mix multiple configs with "mergeConfigs" util
+const {
+  commonBabelConfig,
+  nextBabelConfig,
+  mergeConfigs,
+} = require('@episclera/multipack')
+// OR install and import just what you need separately: const { commonBabelConfig, nextBabelConfig } = require('@episclera/babel-config')
+// const { mergeConfigs } = require('@episclera/multipack-utils')
+
+module.exports = mergeConfigs(commonBabelConfig, nextBabelConfig)
+```
+
+#### With Webpack
+
+In your `webpack.config.js` file just put this content.
+
+```js
+const { commonWebpackConfig } = require('@episclera/multipack')
+// OR install and import just what you need separately: const { commonWebpackConfig } = require('@episclera/webpack-config')
+
+module.exports = commonWebpackConfig
+
+// OR you can mix multiple configs with "mergeConfigs" util
+const {
+  commonWebpackConfig,
+  packageWebpackConfig,
+  mergeConfigs,
+} = require('@episclera/multipack')
+// OR install and import just what you need separately: const { commonWebpackConfig, packageWebpackConfig } = require('@episclera/webpack-config')
+// const { mergeConfigs } = require('@episclera/multipack-utils')
+
+module.exports = mergeConfigs(commonWebpackConfig, packageWebpackConfig)
+```
+
+#### With Postcss
+
+In your `postcss.config.js` file just put this content.
+
+```js
+const { postcssConfig } = require('@episclera/multipack')
+// OR install and import just what you need separately: const postcssConfig = require('@episclera/postcss-config')
+
+module.exports = postcssConfig
+```
+
+#### With Tailwindcss
+
+In your `tailwind.config.js` file just put this content.
+
+```js
+const { tailwindConfig } = require('@episclera/multipack')
+// OR install and import just what you need separately: const tailwindConfig = require('@episclera/tailwind-config')
+
+module.exports = tailwindConfig
+```
+
+#### With Next
+
+Usage is similar to next-compose-plugins
+
+In your `next.config.js` file just put this content.
+
+```js
+const { nextConfig } = require('@episclera/multipack')
+// OR install and import just what you need separately: const nextConfig = require('@episclera/next-config')
+
+module.exports = nextConfig()
+```
+
+OR if you want to provide custom plugins or next options or webpack options
+
+```js
+const { nextConfig } = require('@episclera/multipack')
+const { mergeConfigs } = require('@episclera/multipack-utils')
+
+module.exports = nextConfig([myPlugin], {
+  publicRuntimeConfig: {
+    HOME_ROUTE_PATH: '/welcome',
+  },
+  webpack: config =>
+    mergeConfigs(config, {
+      resolve: {
+        alias: {
+          myAlias: './myPath',
+        },
+      },
+    }),
+})
+```
+
+#### With NextI18Next
+
+In your `next-i18next.config.js` file just put this content.
+
+```js
+const { nextI18NextConfig } = require('@episclera/multipack')
+// OR install and import just what you need separately: const nextI18NextConfig = require('@episclera/next-i18next-config')
+
+module.exports = nextI18NextConfig
+```
+
 ## Contributing
 
 1. Fork it!

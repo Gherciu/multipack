@@ -1,10 +1,10 @@
 /* istanbul ignore file */
-import toNumber from './toNumber'
+import mergeConfigs from './mergeConfigs'
 import { MultipackUtils } from '../types'
 
 const multipackUtils: MultipackUtils = {
-  toNumber,
+  mergeConfigs,
 }
 
-export { toNumber }
+export { mergeConfigs }
 export default multipackUtils

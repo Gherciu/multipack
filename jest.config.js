@@ -1,5 +1,4 @@
-const { jestConfig, mergeConfigs } = require('@episclera/configkit')
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { jestConfig } = require('@episclera/configkit')
 
-module.exports = mergeConfigs(jestConfig, {
-  modulePathIgnorePatterns: ['packages/multipack/generators/'],
-})
+module.exports = jestConfig

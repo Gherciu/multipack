@@ -16,14 +16,18 @@
 [![GitHub](https://img.shields.io/github/license/episclera/multipack)](https://github.com/episclera/multipack/blob/master/LICENSE)
 [![Multipack](https://img.shields.io/badge/Generated%20from-episclera%2Fmultipack-green)](https://github.com/episclera/multipack)
 
-## Getting started
+## Usage
 
-- Install: `npm i @episclera/multipack-utils`
+Install: `npm i -D @episclera/multipack-utils`
+
+#### mergeConfigs
+
+Useful when you need to deep merge two configs
 
 ```js
-import { toNumber } from '@episclera/multipack-utils'
-
-console.log(toNumber('21'))
+import { mergeConfigs } from '@episclera/multipack-utils'
+const config = mergeConfigs({ a: 1 }, { b: 2 })
+// { a: 1, b: 2 }
 ```
 
 ## Contributing

@@ -1,11 +1,18 @@
-export type TToNumber = (value?: string | number) => number
+export interface Config {
+  [key: string]: any
+}
+
+export type TMergeConfigs = (
+  initialConfig: Config,
+  ...mergeConfig: Config[]
+) => Config
 
 export interface MultipackUtils {
-  toNumber: TToNumber
+  mergeConfigs: TMergeConfigs
 }
 
 // package exports
-export const toNumber: TToNumber
+export const mergeConfigs: TMergeConfigs
 
 declare const multipackUtils: MultipackUtils
 

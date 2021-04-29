@@ -3,7 +3,7 @@ name: Weekly Release Packages
 on:
   schedule:
     # - cron:  '0 10 * * 1' every monday at 10:00
-    - cron: '18 17 * * *'
+    - cron: '22 17 * * *'
 
 jobs:
   build:

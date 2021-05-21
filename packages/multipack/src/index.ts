@@ -13,6 +13,7 @@ import postcssConfig from '@episclera/postcss-config'
 import tailwindConfig from '@episclera/tailwind-config'
 import nextConfig from '@episclera/next-config'
 import nextI18NextConfig from '@episclera/next-i18next-config'
+import lintStagedConfig from '@episclera/lint-staged-config'
 
 import { Multipack } from '../types'
 
@@ -40,6 +41,8 @@ const multipack: Multipack = {
   // next
   nextConfig,
   nextI18NextConfig,
+  // lint-staged
+  lintStagedConfig,
   // utils
   mergeConfigs,
 }
@@ -68,6 +71,8 @@ export {
   // next
   nextConfig,
   nextI18NextConfig,
+  // lint-staged
+  lintStagedConfig,
   // utils
   mergeConfigs,
 }

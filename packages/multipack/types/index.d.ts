@@ -8,8 +8,9 @@ import { WebpackConfigPart } from '@episclera/webpack-config'
 import { CommitlintConfig } from '@episclera/commitlint-config'
 import { PostcssConfig } from '@episclera/postcss-config'
 import { TailwindConfig } from '@episclera/tailwind-config'
-import { NextI18NextConfig } from '@episclera/next-i18next-config'
 import { NextConfig } from '@episclera/next-config'
+import { NextI18NextConfig } from '@episclera/next-i18next-config'
+import { LintStagedConfig } from '@episclera/lint-staged-config'
 
 export interface Multipack {
   // prettier
@@ -35,6 +36,8 @@ export interface Multipack {
   // next
   nextConfig: NextConfig
   nextI18NextConfig: NextI18NextConfig
+  // lint-staged
+  lintStagedConfig: LintStagedConfig
   // utils
   mergeConfigs: TMergeConfigs
 }
@@ -63,6 +66,8 @@ export const packageWebpackConfig: WebpackConfigPart
 // next
 export const nextConfig: NextConfig
 export const nextI18NextConfig: NextI18NextConfig
+// lint-staged
+export const lintStagedConfig: LintStagedConfig
 // utils
 export const mergeConfigs: TMergeConfigs
 

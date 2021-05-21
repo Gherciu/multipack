@@ -116,6 +116,17 @@ const { stylelintConfig } = require('@episclera/multipack')
 module.exports = stylelintConfig
 ```
 
+#### With LintStaged
+
+In your `lint-staged.config.js` file just put this content.
+
+```js
+const { lintStagedConfig } = require('@episclera/multipack')
+// OR install and import just what you need separately: const lintStagedConfig = require('@episclera/next-i18next-config')
+
+module.exports = lintStagedConfig
+```
+
 #### With Babel
 
 In your `.babelrc.js` file just put this content.

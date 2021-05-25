@@ -238,6 +238,17 @@ const { nextI18NextConfig } = require('@episclera/multipack')
 module.exports = nextI18NextConfig
 ```
 
+#### With CodeGen
+
+In your `.codegenrc.js` file just put this content.
+
+```js
+const { codeGenConfig } = require('@episclera/multipack')
+// OR install and import just what you need separately: const codeGenConfig = require('@episclera/codegen-config')
+
+module.exports = codeGenConfig
+```
+
 ## Contributing
 
 1. Fork it!

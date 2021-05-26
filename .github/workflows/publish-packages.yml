@@ -45,17 +45,3 @@ jobs:
           yes | npm run publish:packages:github
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-      - name: Use AWS Elastic Beanstalk CLI
-        uses: tristanbarlow/setup-elasticbeanstalk-cli@v1.0.0
-      - name: Check AWS Elastic Beanstalk CLI version
-        run: |
-          eb --version
-      - name: Publish to AWS Elastic Beanstalk
-        run: |
-          npm run publish:packages:aws

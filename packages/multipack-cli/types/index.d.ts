@@ -69,13 +69,9 @@ export interface GeneratorSelectPrompt extends GeneratorBasePrompt {
 export type GeneratorPrompt = GeneratorInputPrompt | GeneratorSelectPrompt
 
 export interface GeneratorActionBase {
-  files:
-    | {
-        [key: string]: string
-      }
-    | ((answers: GeneratorAnswers) => {
-        [key: string]: string
-      })
+  files: {
+    [key: string]: string
+  }
 }
 
 export interface GeneratorCopyAction extends GeneratorActionBase {
@@ -118,7 +114,9 @@ export interface ActionResult {
 
 export interface Generator {
   prompts?: GeneratorPrompt[]
-  actions: GeneratorAction[]
+  actions:
+    | GeneratorAction[]
+    | ((answers: GeneratorAnswers) => GeneratorAction[])
 }
 
 // generator methods
@@ -128,15 +126,31 @@ export type TRunPrompts = (
   prompts: GeneratorPrompt[],
 ) => Promise<GeneratorAnswers>
 
-export type TRunActions = (
-  actions: GeneratorAction[],
-  answers: GeneratorAnswers,
-) => Promise<void>
+export type TRunActions = (actions: GeneratorAction[]) => Promise<void>
 
 // generator actions handlers
 export type TCopyAction = (
   actions: GeneratorCopyAction,
-  answers: GeneratorAnswers,
+) => Promise<ActionResult[]>
+
+export type TRenameAction = (
+  actions: GeneratorRenameAction,
+) => Promise<ActionResult[]>
+
+export type TTransformTemplateAction = (
+  actions: GeneratorTransformTemplateAction,
+) => Promise<ActionResult[]>
+
+export type TMoveAction = (
+  actions: GeneratorMoveAction,
+) => Promise<ActionResult[]>
+
+export type TRemoveAction = (
+  actions: GeneratorRemoveAction,
+) => Promise<ActionResult[]>
+
+export type TModifyAction = (
+  actions: GeneratorModifyAction,
 ) => Promise<ActionResult[]>
 
 // main

@@ -3,3 +3,7 @@ node_modules/
 
 # Build directories
 **/build
+
+# next files
+**/.next/
+**/out

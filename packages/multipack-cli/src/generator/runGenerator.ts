@@ -14,7 +14,12 @@ const runGenerator: TRunGenerator = async generator => {
     answers = await runPrompts(generator.prompts)
   }
 
-  await runActions(generator.actions, answers)
+  const generatorActions =
+    typeof generator.actions === 'function'
+      ? generator.actions(answers)
+      : generator.actions
+
+  await runActions(generatorActions)
 }
 
 export default runGenerator

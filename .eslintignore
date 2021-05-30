@@ -3,3 +3,10 @@ node_modules/
 
 # Build directories
 **/build
+
+# next files
+**/.next/
+**/out
+
+# strapi files
+**/.cache/

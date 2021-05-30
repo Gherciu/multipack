@@ -18,17 +18,27 @@ const workspaceGenerator: Generator = {
       message: 'Workspace description (e.g, Enjoyable workspace)',
     },
   ],
-  actions: [
-    {
-      type: 'copy',
-      files: ({ workspaceName }) => ({
-        [path.join(getTemplatesDirPath(), '/create/workspace/')]: path.join(
-          process.cwd(),
-          workspaceName,
-        ),
-      }),
-    },
-  ],
+  actions: ({ workspaceName }) => {
+    const newWorkspaceDir = path.join(process.cwd(), workspaceName)
+    return [
+      {
+        type: 'copy',
+        files: {
+          [path.join(getTemplatesDirPath(), '/create/workspace/')]:
+            newWorkspaceDir,
+        },
+      },
+      {
+        type: 'rename',
+        files: {
+          [path.join(newWorkspaceDir, '_gitignore')]: path.join(
+            newWorkspaceDir,
+            '.gitignore',
+          ),
+        },
+      },
+    ]
+  },
 }
 
 export default workspaceGenerator

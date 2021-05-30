@@ -1,22 +1,22 @@
-import { copy } from 'fs-extra'
+import { rename } from 'fs'
 import cliSpinner from '../../utils/cliSpinner'
-import { TCopyAction, ActionResult } from '../../../types'
+import { TRenameAction, ActionResult } from '../../../types'
 
 /**
- * Used to run copy actions
- * @param action - represents a copy action from generator actions array
+ * Used to run rename actions
+ * @param action - represents a rename action from generator actions array
  */
 /* istanbul ignore next */
-const copyAction: TCopyAction = async action => {
+const renameAction: TRenameAction = async action => {
   const actionResult = (await Promise.all(
     Object.entries(action.files).map(
       ([from, to]) =>
         new Promise(resolve => {
           const spinner = cliSpinner(
-            `Copying files from "${from}" to "${to}"`,
+            `Renaming files from "${from}" to "${to}"`,
           ).start()
 
-          copy(from, to, error => {
+          rename(from, to, error => {
             if (error) {
               spinner.fail()
               resolve({ error })
@@ -32,4 +32,4 @@ const copyAction: TCopyAction = async action => {
   return actionResult
 }
 
-export default copyAction
+export default renameAction

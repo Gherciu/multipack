@@ -1,22 +1,22 @@
-import { copy } from 'fs-extra'
+import { remove } from 'fs-extra'
 import cliSpinner from '../../utils/cliSpinner'
-import { TCopyAction, ActionResult } from '../../../types'
+import { TRemoveAction, ActionResult } from '../../../types'
 
 /**
- * Used to run copy actions
- * @param action - represents a copy action from generator actions array
+ * Used to run remove actions
+ * @param action - represents a remove action from generator actions array
  */
 /* istanbul ignore next */
-const copyAction: TCopyAction = async action => {
+const removeAction: TRemoveAction = async action => {
   const actionResult = (await Promise.all(
-    Object.entries(action.files).map(
-      ([from, to]) =>
+    action.files.map(
+      fileName =>
         new Promise(resolve => {
           const spinner = cliSpinner(
-            `Copying files from "${from}" to "${to}"`,
+            `Removing files from "${fileName}"`,
           ).start()
 
-          copy(from, to, error => {
+          remove(fileName, error => {
             if (error) {
               spinner.fail()
               resolve({ error })
@@ -32,4 +32,4 @@ const copyAction: TCopyAction = async action => {
   return actionResult
 }
 
-export default copyAction
+export default removeAction

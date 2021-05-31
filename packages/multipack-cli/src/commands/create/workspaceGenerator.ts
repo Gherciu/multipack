@@ -53,6 +53,14 @@ const workspaceGenerator: Generator = {
             newWorkspaceDir,
             'package.json',
           ),
+          [path.join(newWorkspaceDir, '_tsconfig.json')]: path.join(
+            newWorkspaceDir,
+            'tsconfig.json',
+          ),
+          [path.join(newWorkspaceDir, '_lerna.json')]: path.join(
+            newWorkspaceDir,
+            'lerna.json',
+          ),
         },
       },
       {

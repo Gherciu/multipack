@@ -96,12 +96,19 @@ export interface GeneratorModifyAction extends ReplaceInFileConfig {
   type: 'modify'
 }
 
+export interface GeneratorTransformAction extends Partial<ReplaceInFileConfig> {
+  type: 'transform'
+  files: ReplaceInFileConfig['files']
+  data: { [key: string]: string }
+}
+
 export type GeneratorAction =
   | GeneratorCopyAction
   | GeneratorRenameAction
   | GeneratorRemoveAction
   | GeneratorMoveAction
   | GeneratorModifyAction
+  | GeneratorTransformAction
 
 export interface ActionResult {
   error: boolean | Error
@@ -142,6 +149,10 @@ export type TRemoveAction = (
 
 export type TModifyAction = (
   actions: GeneratorModifyAction,
+) => Promise<ActionResult[]>
+
+export type TTransformAction = (
+  actions: GeneratorTransformAction,
 ) => Promise<ActionResult[]>
 
 // main

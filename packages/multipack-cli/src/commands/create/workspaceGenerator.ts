@@ -24,8 +24,8 @@ const workspaceGenerator: Generator = {
       message: 'Organization name (e.g, my-organization)',
     },
   ],
-  actions: ({ workspaceName, workspaceDescription, organizationName }) => {
-    const newWorkspaceDir = path.join(process.cwd(), workspaceName)
+  actions: answers => {
+    const newWorkspaceDir = path.join(process.cwd(), answers.workspaceName)
     return [
       {
         type: 'copy',
@@ -35,22 +35,9 @@ const workspaceGenerator: Generator = {
         },
       },
       {
-        type: 'modify',
-        files: [path.join(newWorkspaceDir, '/*')],
-        from: /{{workspaceName}}/g,
-        to: workspaceName as string,
-      },
-      {
-        type: 'modify',
-        files: [path.join(newWorkspaceDir, '/*')],
-        from: /{{workspaceDescription}}/g,
-        to: workspaceDescription as string,
-      },
-      {
-        type: 'modify',
-        files: [path.join(newWorkspaceDir, '/*')],
-        from: /{{organizationName}}/g,
-        to: organizationName as string,
+        type: 'transform',
+        files: path.join(newWorkspaceDir, '/*'),
+        data: answers,
       },
       {
         type: 'rename',

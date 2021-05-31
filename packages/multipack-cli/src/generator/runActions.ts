@@ -5,6 +5,7 @@ import renameAction from './actionsHandlers/renameAction'
 import moveAction from './actionsHandlers/moveAction'
 import removeAction from './actionsHandlers/removeAction'
 import modifyAction from './actionsHandlers/modifyAction'
+import transformAction from './actionsHandlers/transformAction'
 
 /**
  * Used to run generator actions
@@ -43,6 +44,12 @@ const runActions: TRunActions = async actions => {
     if (action.type === 'modify') {
       // eslint-disable-next-line no-await-in-loop
       const actionResult = await modifyAction(action)
+      actionsRunResults.push(...actionResult)
+    }
+
+    if (action.type === 'transform') {
+      // eslint-disable-next-line no-await-in-loop
+      const actionResult = await transformAction(action)
       actionsRunResults.push(...actionResult)
     }
   }

@@ -10,8 +10,9 @@ import { TModifyAction, ActionResult } from '../../../types'
 const modifyAction: TModifyAction = async ({ type, ...modifyOptions }) => {
   const actionResult: ActionResult = await new Promise(resolve => {
     const spinner = cliSpinner(
-      `Modifying files "${modifyOptions.files}" by using this pattern "${modifyOptions.from}"`,
+      `Modifying files "${modifyOptions.files}" using this pattern "${modifyOptions.from}"`,
     ).start()
+
     replaceInFile(modifyOptions, error => {
       if (error) {
         spinner.fail()

@@ -1,0 +1,52 @@
+{
+  "name": "@<%= organizationName %>/<%= packageName %>",
+  "description": "<%= packageDescription %>",
+  "version": "1.0.0",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Episclera",
+    "email": "<%= organizationName %>@<%= organizationName %>.com",
+    "url": "https://<%= organizationName %>.com"
+  },
+  "homepage": "https://<%= organizationName %>.github.io/<%= workspaceName %>/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/<%= organizationName %>/<%= workspaceName %>"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/<%= organizationName %>"
+  },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/<%= organizationName %>"
+  },
+  "keywords": ["<%= packageName %>"],
+  "bugs": {
+    "url": "https://github.com/<%= organizationName %>/<%= workspaceName %>/issues"
+  },
+  "main": "./build/index.js",
+  "types": "./types",
+  "scripts": {
+    "build": "rimraf ./build && cross-env NODE_ENV=production webpack",
+    "watch": "cross-env NODE_ENV=development webpack -w",
+    "postinstall": "opencollective-postinstall || exit 0"
+  },
+  "devDependencies": {
+    "@episclera/multipack-utils": "latest",
+    "@episclera/webpack-config": "latest",
+    "cross-env": "latest",
+    "rimraf": "latest",
+    "ts-loader": "latest",
+    "typescript": "latest",
+    "webpack": "latest",
+    "webpack-cli": "latest"
+  },
+  "dependencies": {
+    "opencollective-postinstall": "latest"
+  },
+  "gitHead": "8635a43c9abe3ab19ed07077384ebf40fbd7717c"
+}

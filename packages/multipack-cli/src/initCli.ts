@@ -22,7 +22,7 @@ const initCli: TInitCli = (args = process.argv, override) => {
 
   // Note: reading pkg using fs because if importing it then the version will not be dynamic but one from build step but not the one after publish step
   const pkg = readJSONSync(path.join(__dirname, '../package.json')) as {
-    [key: string]: any
+    version: string
   }
 
   program.version(pkg.version)

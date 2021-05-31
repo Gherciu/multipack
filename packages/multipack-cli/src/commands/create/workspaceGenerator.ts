@@ -45,6 +45,10 @@ const workspaceGenerator: Generator = {
       {
         type: 'rename',
         files: {
+          [path.join(newWorkspaceDir, './.husky/_gitignore')]: path.join(
+            newWorkspaceDir,
+            './.husky/.gitignore',
+          ),
           [path.join(newWorkspaceDir, '_gitignore')]: path.join(
             newWorkspaceDir,
             '.gitignore',

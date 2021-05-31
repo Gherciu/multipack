@@ -7,6 +7,6 @@ const { mergeConfigs } = require('@episclera/multipack-utils')
 
 module.exports = mergeConfigs(commonWebpackConfig, packageWebpackConfig, {
   output: {
-    library: 'multipackCli',
+    library: 'umdModule',
   },
 })

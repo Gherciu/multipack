@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import path from 'path'
 import withPlugins from 'next-compose-plugins'
 import withAntdLess from 'next-plugin-antd-less'
 import { i18n } from '@episclera/next-i18next-config'
@@ -16,14 +15,6 @@ const nextConfig: NextConfig = (plugins = [], config = {}) => {
         i18n,
         webpack: (nextWebpackConfig: { [key: string]: any }) => {
           const customWebpackConfig = mergeConfigs(nextWebpackConfig, {
-            resolve: {
-              alias: {
-                '@utils': path.join(process.cwd(), 'utils'),
-                '@common': path.join(process.cwd(), 'components/common'),
-                '@components': path.join(process.cwd(), 'components'),
-                '@static': path.join(process.cwd(), 'public/static'),
-              },
-            },
             module: {
               rules: [
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access

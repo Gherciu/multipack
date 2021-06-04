@@ -1,6 +1,5 @@
 import { mergeConfigs } from '@episclera/multipack-utils'
 import { i18n } from '@episclera/next-i18next-config'
-import path from 'path'
 import nextConfig from '../index'
 
 jest.mock('next-plugin-antd-less', (...rest) => rest)
@@ -48,7 +47,6 @@ describe('nextConfig', () => {
     ).toMatchObject({
       resolve: {
         alias: {
-          '@components': path.join(process.cwd(), 'components'),
           nextAlias: './nextPath',
           myAlias: './myPath',
         },
@@ -58,21 +56,7 @@ describe('nextConfig', () => {
 
   it('Should correctly return its own webpack config', () => {
     expect(nextConfig([], {})('development', {}).webpack?.({})).toMatchObject({
-      resolve: {
-        alias: {
-          '@components': path.join(process.cwd(), 'components'),
-        },
-      },
-    })
-  })
-
-  it('Should correctly return its own webpack config', () => {
-    expect(nextConfig([], {})('development', {}).webpack?.({})).toMatchObject({
-      resolve: {
-        alias: {
-          '@components': path.join(process.cwd(), 'components'),
-        },
-      },
+      module: {},
     })
   })
 

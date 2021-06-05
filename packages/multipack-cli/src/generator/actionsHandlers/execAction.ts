@@ -5,7 +5,7 @@ import { TExecAction } from '../../../types'
 
 /**
  * Used to run exec actions
- * @param action - represents a exec action from generator actions array
+ * @param action - represents a exec action from generator config actions array
  */
 /* istanbul ignore next */
 const execAction: TExecAction = async ({ type, command, ...execaOptions }) => {

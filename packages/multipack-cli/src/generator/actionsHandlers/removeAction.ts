@@ -1,10 +1,10 @@
 import { remove } from 'fs-extra'
 import cliSpinner from '../../utils/cliSpinner'
-import { TRemoveAction, ActionResult } from '../../../types'
+import { TRemoveAction, GeneratorActionResult } from '../../../types'
 
 /**
  * Used to run remove actions
- * @param action - represents a remove action from generator actions array
+ * @param action - represents a remove action from generator config actions array
  */
 /* istanbul ignore next */
 const removeAction: TRemoveAction = async action => {
@@ -27,7 +27,7 @@ const removeAction: TRemoveAction = async action => {
           })
         }),
     ),
-  )) as ActionResult[]
+  )) as GeneratorActionResult[]
 
   return actionResult
 }

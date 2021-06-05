@@ -1,10 +1,10 @@
 import { move } from 'fs-extra'
 import cliSpinner from '../../utils/cliSpinner'
-import { TMoveAction, ActionResult } from '../../../types'
+import { TMoveAction, GeneratorActionResult } from '../../../types'
 
 /**
  * Used to run move actions
- * @param action - represents a move action from generator actions array
+ * @param action - represents a move action from generator config actions array
  */
 /* istanbul ignore next */
 const moveAction: TMoveAction = async action => {
@@ -27,7 +27,7 @@ const moveAction: TMoveAction = async action => {
           })
         }),
     ),
-  )) as ActionResult[]
+  )) as GeneratorActionResult[]
 
   return actionResult
 }

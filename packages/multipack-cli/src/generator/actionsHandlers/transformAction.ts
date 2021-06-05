@@ -2,11 +2,11 @@ import template from 'lodash.template'
 import templateSettings from 'lodash.templatesettings'
 import { replaceInFile } from 'replace-in-file'
 import cliSpinner from '../../utils/cliSpinner'
-import { TTransformAction, ActionResult } from '../../../types'
+import { TTransformAction, GeneratorActionResult } from '../../../types'
 
 /**
  * Used to run transform actions
- * @param action - represents a transform action from generator actions array
+ * @param action - represents a transform action from generator config actions array
  */
 /* istanbul ignore next */
 const transformAction: TTransformAction = async ({
@@ -14,7 +14,7 @@ const transformAction: TTransformAction = async ({
   data,
   ...modifyOptions
 }) => {
-  const actionResult: ActionResult = await new Promise(resolve => {
+  const actionResult: GeneratorActionResult = await new Promise(resolve => {
     const spinner = cliSpinner(
       `Transforming files "${modifyOptions.files}" using provided data`,
     ).start()

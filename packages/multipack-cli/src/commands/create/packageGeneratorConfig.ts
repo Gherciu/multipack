@@ -1,10 +1,10 @@
 import path from 'path'
 import { readJSONSync } from 'fs-extra'
-import { Generator } from '../../../types'
+import { GeneratorConfig } from '../../../types'
 import getTemplatesDirPath from '../../utils/getTemplatesDirPath'
 
 /* istanbul ignore next */
-const packageGenerator: Generator = {
+const packageGenerator: GeneratorConfig = {
   prompts: [
     {
       type: 'select',

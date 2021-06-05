@@ -1,10 +1,10 @@
 import { rename } from 'fs'
 import cliSpinner from '../../utils/cliSpinner'
-import { TRenameAction, ActionResult } from '../../../types'
+import { TRenameAction, GeneratorActionResult } from '../../../types'
 
 /**
  * Used to run rename actions
- * @param action - represents a rename action from generator actions array
+ * @param action - represents a rename action from generator config actions array
  */
 /* istanbul ignore next */
 const renameAction: TRenameAction = async action => {
@@ -27,7 +27,7 @@ const renameAction: TRenameAction = async action => {
           })
         }),
     ),
-  )) as ActionResult[]
+  )) as GeneratorActionResult[]
 
   return actionResult
 }

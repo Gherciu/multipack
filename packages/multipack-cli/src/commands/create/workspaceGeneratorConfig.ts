@@ -1,9 +1,9 @@
 import path from 'path'
-import { Generator } from '../../../types'
+import { GeneratorConfig } from '../../../types'
 import getTemplatesDirPath from '../../utils/getTemplatesDirPath'
 
 /* istanbul ignore next */
-const workspaceGenerator: Generator = {
+const workspaceGenerator: GeneratorConfig = {
   prompts: [
     {
       type: 'input',

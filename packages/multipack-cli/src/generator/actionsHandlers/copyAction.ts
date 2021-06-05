@@ -1,10 +1,10 @@
 import { copy } from 'fs-extra'
 import cliSpinner from '../../utils/cliSpinner'
-import { TCopyAction, ActionResult } from '../../../types'
+import { TCopyAction, GeneratorActionResult } from '../../../types'
 
 /**
  * Used to run copy actions
- * @param action - represents a copy action from generator actions array
+ * @param action - represents a copy action from generator config actions array
  */
 /* istanbul ignore next */
 const copyAction: TCopyAction = async action => {
@@ -27,7 +27,7 @@ const copyAction: TCopyAction = async action => {
           })
         }),
     ),
-  )) as ActionResult[]
+  )) as GeneratorActionResult[]
 
   return actionResult
 }

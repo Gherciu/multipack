@@ -27,11 +27,11 @@ export interface Log {
 export type TCLISpinner = (message?: string) => ora.Ora
 
 // generator
-export interface GeneratorAnswers {
+export interface GeneratorPromptAnswers {
   [key: string]: any
 }
 
-export interface GeneratorBasePrompt {
+export interface GeneratorConfigBasePrompt {
   name: string | (() => string)
   type: string | (() => string)
   message: string | (() => string) | (() => Promise<string>)
@@ -59,112 +59,115 @@ export interface GeneratorBasePrompt {
   stdout?: NodeJS.WriteStream
 }
 
-export interface GeneratorInputPrompt extends GeneratorBasePrompt {
+export interface GeneratorConfigInputPrompt extends GeneratorConfigBasePrompt {
   type: 'input' | (() => 'input')
 }
 
-export interface GeneratorSelectPrompt extends GeneratorBasePrompt {
+export interface GeneratorConfigSelectPrompt extends GeneratorConfigBasePrompt {
   type: 'select' | (() => 'select')
   choices: string[]
 }
 
-export type GeneratorPrompt = GeneratorInputPrompt | GeneratorSelectPrompt
+export type GeneratorConfigPrompt =
+  | GeneratorConfigInputPrompt
+  | GeneratorConfigSelectPrompt
 
-export interface GeneratorActionBase {
+export interface GeneratorConfigActionBase {
   files: {
     [key: string]: string
   }
 }
 
-export interface GeneratorCopyAction extends GeneratorActionBase {
+export interface GeneratorConfigCopyAction extends GeneratorConfigActionBase {
   type: 'copy'
 }
 
-export interface GeneratorMoveAction extends GeneratorActionBase {
+export interface GeneratorConfigMoveAction extends GeneratorConfigActionBase {
   type: 'move'
 }
 
-export interface GeneratorRenameAction extends GeneratorActionBase {
+export interface GeneratorConfigRenameAction extends GeneratorConfigActionBase {
   type: 'rename'
 }
 
-export interface GeneratorRemoveAction {
+export interface GeneratorConfigRemoveAction {
   type: 'remove'
   files: string[]
 }
 
-export interface GeneratorModifyAction extends ReplaceInFileConfig {
+export interface GeneratorConfigModifyAction extends ReplaceInFileConfig {
   type: 'modify'
 }
 
-export interface GeneratorTransformAction extends Partial<ReplaceInFileConfig> {
+export interface GeneratorConfigTransformAction
+  extends Partial<ReplaceInFileConfig> {
   type: 'transform'
   files: ReplaceInFileConfig['files']
   data: { [key: string]: string }
 }
 
-export interface GeneratorExecAction extends execa.Options {
+export interface GeneratorConfigExecAction extends execa.Options {
   type: 'exec'
   command: string
 }
 
-export type GeneratorAction =
-  | GeneratorCopyAction
-  | GeneratorRenameAction
-  | GeneratorRemoveAction
-  | GeneratorMoveAction
-  | GeneratorModifyAction
-  | GeneratorTransformAction
-  | GeneratorExecAction
+export type GeneratorConfigAction =
+  | GeneratorConfigCopyAction
+  | GeneratorConfigRenameAction
+  | GeneratorConfigRemoveAction
+  | GeneratorConfigMoveAction
+  | GeneratorConfigModifyAction
+  | GeneratorConfigTransformAction
+  | GeneratorConfigExecAction
 
-export interface ActionResult {
+export interface GeneratorActionResult {
   error: boolean | Error
 }
 
-export interface Generator {
-  prompts?: GeneratorPrompt[]
+export interface GeneratorConfig {
+  prompts?: GeneratorConfigPrompt[]
   actions:
-    | GeneratorAction[]
-    | ((answers: GeneratorAnswers) => GeneratorAction[])
+    | GeneratorConfigAction[]
+    | ((answers: GeneratorPromptAnswers) => GeneratorConfigAction[])
 }
 
 // generator methods
-export type TRunGenerator = (generator: Generator) => Promise<void>
+export type TGenerator = (generatorConfig: GeneratorConfig) => Promise<void>
 
 export type TRunPrompts = (
-  prompts: GeneratorPrompt[],
-) => Promise<GeneratorAnswers>
+  prompts: GeneratorConfigPrompt[],
+) => Promise<GeneratorPromptAnswers>
 
-export type TRunActions = (actions: GeneratorAction[]) => Promise<void>
+export type TRunActions = (actions: GeneratorConfigAction[]) => Promise<void>
 
 // generator actions handlers
 export type TCopyAction = (
-  actions: GeneratorCopyAction,
-) => Promise<ActionResult[]>
+  actions: GeneratorConfigCopyAction,
+) => Promise<GeneratorActionResult[]>
 
 export type TRenameAction = (
-  actions: GeneratorRenameAction,
-) => Promise<ActionResult[]>
+  actions: GeneratorConfigRenameAction,
+) => Promise<GeneratorActionResult[]>
 
 export type TMoveAction = (
-  actions: GeneratorMoveAction,
-) => Promise<ActionResult[]>
+  actions: GeneratorConfigMoveAction,
+) => Promise<GeneratorActionResult[]>
 
 export type TRemoveAction = (
-  actions: GeneratorRemoveAction,
-) => Promise<ActionResult[]>
+  actions: GeneratorConfigRemoveAction,
+) => Promise<GeneratorActionResult[]>
 
 export type TModifyAction = (
-  actions: GeneratorModifyAction,
-) => Promise<ActionResult[]>
+  actions: GeneratorConfigModifyAction,
+) => Promise<GeneratorActionResult[]>
 
 export type TTransformAction = (
-  actions: GeneratorTransformAction,
-) => Promise<ActionResult[]>
+  actions: GeneratorConfigTransformAction,
+) => Promise<GeneratorActionResult[]>
 
 export type TExecAction = (
-  actions: GeneratorExecAction,
-) => Promise<ActionResult[]>
+  actions: GeneratorConfigExecAction,
+) => Promise<GeneratorActionResult[]>
 
 // main
 export type TInitCli = (

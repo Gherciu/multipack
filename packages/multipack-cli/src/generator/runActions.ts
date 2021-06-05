@@ -1,5 +1,5 @@
 import log from '../utils/log'
-import { TRunActions, ActionResult } from '../../types'
+import { TRunActions, GeneratorActionResult } from '../../types'
 import copyAction from './actionsHandlers/copyAction'
 import renameAction from './actionsHandlers/renameAction'
 import moveAction from './actionsHandlers/moveAction'
@@ -9,12 +9,12 @@ import transformAction from './actionsHandlers/transformAction'
 import execAction from './actionsHandlers/execAction'
 
 /**
- * Used to run generator actions
+ * Used to run generator config actions
  * @param actions - array of actions to run
  */
 /* istanbul ignore next */
 const runActions: TRunActions = async actions => {
-  const actionsRunResults: ActionResult[] = []
+  const actionsRunResults: GeneratorActionResult[] = []
 
   // eslint-disable-next-line no-restricted-syntax
   for (const action of actions) {

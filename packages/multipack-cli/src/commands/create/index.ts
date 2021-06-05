@@ -1,18 +1,14 @@
 /* eslint-disable consistent-return */
-import packageGenerator from './packageGenerator'
-import workspaceGenerator from './workspaceGenerator'
-import runGenerator from '../../generator/runGenerator'
+import packageGeneratorConfig from './packageGeneratorConfig'
+import workspaceGeneratorConfig from './workspaceGeneratorConfig'
+import generator from '../../generator'
 import log from '../../utils/log'
 import isCWDWorkspaceRootFolder from '../../utils/isCWDWorkspaceRootFolder'
-import { TCreateCommand, Generator } from '../../../types'
+import { TCreateCommand, GeneratorConfig } from '../../../types'
 
 /**
  * Commander action used to generate a "workspace" or "package"
  * @param createType - defines what you want to create "workspace" or "package"
- * @example
- * ```ts
- * createCommand('workspace')
- * ```
  */
 const createCommand: TCreateCommand = async createType => {
   if (!['workspace', 'package'].includes(createType)) {
@@ -32,12 +28,12 @@ const createCommand: TCreateCommand = async createType => {
     return
   }
 
-  const createGenerators: { [key: string]: Generator } = {
-    package: packageGenerator,
-    workspace: workspaceGenerator,
+  const generatorConfigs: { [key: string]: GeneratorConfig } = {
+    package: packageGeneratorConfig,
+    workspace: workspaceGeneratorConfig,
   }
 
-  await runGenerator(createGenerators[createType])
+  await generator(generatorConfigs[createType])
 }
 
 export default createCommand

@@ -1,5 +1,4 @@
 import getEndValueFromAny from '../getEndValueFromAny'
-import { GeneratorAnswers } from '../../../types'
 
 describe('getEndValueFromAny', () => {
   it('Should return correct value', () => {
@@ -8,8 +7,8 @@ describe('getEndValueFromAny', () => {
     expect(getEndValueFromAny(expectedValue, {})).toBe(expectedValue)
     expect(
       getEndValueFromAny(
-        ({ expectedValue: valueToReturn }: GeneratorAnswers) =>
-          valueToReturn as string,
+        ({ expectedValue: valueToReturn }: { [key: string]: string }) =>
+          valueToReturn,
         { expectedValue },
       ),
     ).toBe(expectedValue)

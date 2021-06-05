@@ -3,7 +3,7 @@ import { LintStagedConfig } from '../types'
 
 /* istanbul ignore next */
 const lintStagedConfig: LintStagedConfig = {
-  '*.(ts|tsx)': ['npm run lint:packages'],
+  '*.(ts|tsx)': ['npm run lint:packages:scripts'],
   '*.(less)': ['npm run lint:packages:styles'],
 }
 

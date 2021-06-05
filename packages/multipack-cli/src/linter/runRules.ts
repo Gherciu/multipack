@@ -30,16 +30,13 @@ const runRules: TRunRules = async rules => {
 
   if (rulesRunResults.every(({ error }) => !error)) {
     log.success('All linter rules passed with success')
-  } else if (rulesRunResults.every(({ error }) => error)) {
-    rulesRunResults
-      .filter(({ error }) => error)
-      .forEach(({ error }) => log.error(error as Error))
-    log.error(`All linter rules failed due to these errors above!`)
   } else {
-    rulesRunResults
-      .filter(({ error }) => error)
-      .forEach(({ error }) => log.error(error as Error))
-    log.warning(`Some linter rules failed due to these errors above!`)
+    const rulesWithErrors = rulesRunResults.filter(({ error }) => error)
+
+    rulesWithErrors.forEach(({ error }) => log.error(error as Error))
+    log.warning(
+      `${rulesWithErrors.length} of ${rulesRunResults.length} linter rules failed due to these errors above!`,
+    )
   }
 }
 

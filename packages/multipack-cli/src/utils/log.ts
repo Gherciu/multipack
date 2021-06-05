@@ -7,18 +7,22 @@ import { Log } from '../../types'
  */
 const log: Log = {
   info: message => {
-    console.log(chalk.blue(`\nInfo: ${message}`))
+    console.log(`${chalk.blue('\nInfo:')} ${message}`)
   },
-  error: message => {
+  error: errorMessage => {
     console.log(
-      chalk.red(`\n${typeof message === 'string' ? 'Error: ' : ''}${message}`),
+      `${chalk.red('\nError:')} ${
+        typeof errorMessage === 'string'
+          ? errorMessage
+          : errorMessage.message.replace('Error:', '')
+      }`,
     )
   },
   warning: message => {
-    console.log(chalk.yellow(`\nWarning: ${message}`))
+    console.log(`${chalk.yellow('\nWarning:')} ${message}`)
   },
   success: message => {
-    console.log(chalk.green(`\nSuccess: ${message}`))
+    console.log(`${chalk.green('\nSuccess:')} ${message}`)
   },
 }
 

@@ -9,19 +9,25 @@ describe('log', () => {
     log.warning(message)
     log.success(message)
 
-    expect(spy.mock.calls[0][0]).toMatch(`Info: ${message}`)
-    expect(spy.mock.calls[1][0]).toMatch(`Error: ${message}`)
-    expect(spy.mock.calls[2][0]).toMatch(`Warning: ${message}`)
-    expect(spy.mock.calls[3][0]).toMatch(`Success: ${message}`)
+    // Using regexp due to chalk characters in the received string
+    expect(spy.mock.calls[0][0]).toMatch(new RegExp(`Info:.* ${message}`))
+    expect(spy.mock.calls[1][0]).toMatch(new RegExp(`Error:.* ${message}`))
+    expect(spy.mock.calls[2][0]).toMatch(new RegExp(`Warning:.* ${message}`))
+    expect(spy.mock.calls[3][0]).toMatch(new RegExp(`Success:.* ${message}`))
     spy.mockClear()
   })
 
-  it('Should log correct message when message type is Error', () => {
+  it('Should log correct message when message type is Error and not to duplicate the Error word', () => {
     const spy = jest.spyOn(console, 'log')
     const message = 'test message from multipack-cli'
     log.error(new Error(message))
 
-    expect(spy.mock.calls[0][0]).toMatch(`Error: ${message}`)
+    // Using regexp due to chalk characters in the received string
+    expect(spy.mock.calls[0][0]).toMatch(new RegExp(`Error:.* ${message}`))
+    // Check Error word duplication
+    expect(spy.mock.calls[0][0]).not.toMatch(
+      new RegExp(`Error:.*Error: ${message}`),
+    )
     spy.mockClear()
   })
 })

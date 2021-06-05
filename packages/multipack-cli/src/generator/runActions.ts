@@ -60,16 +60,13 @@ const runActions: TRunActions = async actions => {
 
   if (actionsRunResults.every(({ error }) => !error)) {
     log.success('All generator actions passed with success')
-  } else if (actionsRunResults.every(({ error }) => error)) {
-    actionsRunResults
-      .filter(({ error }) => error)
-      .forEach(({ error }) => log.error(error as Error))
-    log.error(`All generator actions failed due to these errors above!`)
   } else {
-    actionsRunResults
-      .filter(({ error }) => error)
-      .forEach(({ error }) => log.error(error as Error))
-    log.warning(`Some generator actions failed due to these errors above!`)
+    const actionsWithErrors = actionsRunResults.filter(({ error }) => error)
+
+    actionsWithErrors.forEach(({ error }) => log.error(error as Error))
+    log.warning(
+      `${actionsWithErrors.length} of ${actionsRunResults.length} linter actions failed due to these errors above!`,
+    )
   }
 }
 

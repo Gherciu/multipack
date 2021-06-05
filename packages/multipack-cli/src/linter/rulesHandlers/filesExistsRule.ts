@@ -7,17 +7,29 @@ import { TFilesExistsRule, LinterRuleResult } from '../../../types'
  * @param rule - represents a filesExists rule from linter config rules
  */
 /* istanbul ignore next */
-const filesExistsRule: TFilesExistsRule = async rule => {
+const filesExistsRule: TFilesExistsRule = async ({
+  type,
+  name,
+  description,
+  files,
+}) => {
   const ruleResult = (await Promise.all(
-    rule.files.map(
+    files.map(
       fileName =>
         new Promise(resolve => {
           const spinner = cliSpinner(`Checking if "${fileName}" exists`).start()
 
           access(fileName, error => {
             if (error) {
+              const ruleDescription =
+                typeof description === 'function'
+                  ? description({ fileName })
+                  : description
+
               spinner.fail()
-              resolve({ error })
+              resolve({
+                error: new Error(`[${type}/${name}] - ${ruleDescription}`),
+              })
             } else {
               spinner.succeed()
               resolve({ error: false })

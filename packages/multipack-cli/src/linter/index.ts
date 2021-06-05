@@ -7,7 +7,12 @@ import { TLinter } from '../../types'
  */
 /* istanbul ignore next */
 const linter: TLinter = async linterConfig => {
-  await runRules(linterConfig.rules)
+  const linterConfigRules =
+    typeof linterConfig.rules === 'function'
+      ? linterConfig.rules()
+      : linterConfig.rules
+
+  await runRules(linterConfigRules)
 }
 
 export default linter

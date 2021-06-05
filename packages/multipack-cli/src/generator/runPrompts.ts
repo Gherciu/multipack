@@ -2,7 +2,7 @@ import { prompt } from 'enquirer'
 import { TRunPrompts } from '../../types'
 
 /**
- * Used to run CLI prompts
+ * Used to run generator config prompts
  * @param prompts - questions
  */
 const runPrompts: TRunPrompts = async prompts => {

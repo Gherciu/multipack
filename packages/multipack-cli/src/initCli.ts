@@ -32,9 +32,7 @@ const initCli: TInitCli = (args = process.argv, override) => {
     .description(
       'Creates a multipack workspace or a package in an existent multipack workspace',
     )
-    .action(async createType => {
-      await createCommand(createType)
-    })
+    .action(createCommand)
 
   program.parse(args)
 }

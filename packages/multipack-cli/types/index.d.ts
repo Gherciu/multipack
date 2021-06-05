@@ -4,28 +4,6 @@ import ora from 'ora'
 import execa from 'execa'
 import { ReplaceInFileConfig } from 'replace-in-file'
 
-// commands
-export type TCreateCommand = (
-  createType: string,
-  mock?: boolean,
-) => Promise<void>
-
-// utils
-export type TIsCWDWorkspaceRootFolder = () => boolean
-
-export type TGetTemplatesDirPath = () => string
-
-export type TGetEndValueFromAny = (rawValue: any, ...fnArgs: any[]) => any
-
-export interface Log {
-  info: (message: string) => void
-  error: (message: string | Error) => void
-  warning: (message: string) => void
-  success: (message: string) => void
-}
-
-export type TCLISpinner = (message?: string) => ora.Ora
-
 // generator
 export interface GeneratorPromptAnswers {
   [key: string]: any
@@ -131,6 +109,35 @@ export interface GeneratorConfig {
     | ((answers: GeneratorPromptAnswers) => GeneratorConfigAction[])
 }
 
+// generator actions handlers
+export type TCopyAction = (
+  action: GeneratorConfigCopyAction,
+) => Promise<GeneratorActionResult[]>
+
+export type TRenameAction = (
+  action: GeneratorConfigRenameAction,
+) => Promise<GeneratorActionResult[]>
+
+export type TMoveAction = (
+  action: GeneratorConfigMoveAction,
+) => Promise<GeneratorActionResult[]>
+
+export type TRemoveAction = (
+  action: GeneratorConfigRemoveAction,
+) => Promise<GeneratorActionResult[]>
+
+export type TModifyAction = (
+  action: GeneratorConfigModifyAction,
+) => Promise<GeneratorActionResult[]>
+
+export type TTransformAction = (
+  action: GeneratorConfigTransformAction,
+) => Promise<GeneratorActionResult[]>
+
+export type TExecAction = (
+  action: GeneratorConfigExecAction,
+) => Promise<GeneratorActionResult[]>
+
 // generator methods
 export type TGenerator = (generatorConfig: GeneratorConfig) => Promise<void>
 
@@ -140,34 +147,66 @@ export type TRunPrompts = (
 
 export type TRunActions = (actions: GeneratorConfigAction[]) => Promise<void>
 
-// generator actions handlers
-export type TCopyAction = (
-  actions: GeneratorConfigCopyAction,
-) => Promise<GeneratorActionResult[]>
+// linter
+export interface LinterConfigBaseRule {
+  name: string
+  description?: string
+  files?: string | string[]
+}
 
-export type TRenameAction = (
-  actions: GeneratorConfigRenameAction,
-) => Promise<GeneratorActionResult[]>
+export interface LinterConfigFilesExistsRule extends LinterConfigBaseRule {
+  type: 'files-exists'
+}
 
-export type TMoveAction = (
-  actions: GeneratorConfigMoveAction,
-) => Promise<GeneratorActionResult[]>
+export interface LinterConfigMatchRule extends LinterConfigBaseRule {
+  type: 'match'
+  pattern: string | RegExp
+}
 
-export type TRemoveAction = (
-  actions: GeneratorConfigRemoveAction,
-) => Promise<GeneratorActionResult[]>
+export type LinterConfigRule =
+  | LinterConfigFilesExistsRule
+  | LinterConfigMatchRule
 
-export type TModifyAction = (
-  actions: GeneratorConfigModifyAction,
-) => Promise<GeneratorActionResult[]>
+export interface LinterRuleResult {
+  error: boolean | Error
+}
+export interface LinterConfig {
+  rules: LinterConfigRule[]
+}
 
-export type TTransformAction = (
-  actions: GeneratorConfigTransformAction,
-) => Promise<GeneratorActionResult[]>
+// linter rules handlers
+export type TFilesExistsRule = (
+  rule: LinterConfigFilesExistsRule,
+) => Promise<LinterRuleResult>
 
-export type TExecAction = (
-  actions: GeneratorConfigExecAction,
-) => Promise<GeneratorActionResult[]>
+// linter rules handlers
+export type TMatchRule = (
+  rule: LinterConfigMatchRule,
+) => Promise<LinterRuleResult>
+
+// linter methods
+export type TRunRules = (rules: LinterConfigRule[]) => Promise<void>
+
+// commands
+export type TCreateCommand = (createType: string) => Promise<void>
+
+export type TLintCommand = () => Promise<void>
+
+// utils
+export type TIsCWDWorkspaceRootFolder = () => boolean
+
+export type TGetTemplatesDirPath = () => string
+
+export type TGetEndValueFromAny = (rawValue: any, ...fnArgs: any[]) => any
+
+export interface Log {
+  info: (message: string) => void
+  error: (message: string | Error) => void
+  warning: (message: string) => void
+  success: (message: string) => void
+}
+
+export type TCLISpinner = (message?: string) => ora.Ora
 
 // main
 export type TInitCli = (

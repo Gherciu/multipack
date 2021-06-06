@@ -1,4 +1,5 @@
 export interface LintStagedConfig {
+  '*': string[]
   '*.(ts|tsx)': string[]
   '*.(less)': string[]
 }

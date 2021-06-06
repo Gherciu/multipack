@@ -8,7 +8,6 @@ import { TTransformAction, GeneratorActionResult } from '../../../types'
  * Used to run transform actions
  * @param action - represents a transform action from generator config actions
  */
-/* istanbul ignore next */
 const transformAction: TTransformAction = async ({
   type,
   data,

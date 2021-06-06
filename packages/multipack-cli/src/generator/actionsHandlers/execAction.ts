@@ -7,7 +7,6 @@ import { TExecAction } from '../../../types'
  * Used to run exec actions
  * @param action - represents a exec action from generator config actions
  */
-/* istanbul ignore next */
 const execAction: TExecAction = async ({ type, command, ...execaOptions }) => {
   let actionResult
   const spinner = cliSpinner(`Executing command "${command}"`).start()
@@ -32,6 +31,7 @@ const execAction: TExecAction = async ({ type, command, ...execaOptions }) => {
     actionResult = { error: error as Error }
     spinner.fail()
   }
+
   return [actionResult]
 }
 

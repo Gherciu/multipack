@@ -18,7 +18,14 @@ const workspaceLinterConfig: LinterConfig = {
           `Following npm scripts ${notMatchingPatterns.map(
             pattern => `\n"${pattern.source}"`,
           )} \nare required to be present in your ${fileName} file`,
-        patterns: [/build:packages/, /test:packages/],
+        patterns: [
+          /link:packages/,
+          /build:packages/,
+          /lint:packages:structure/,
+          /lint:packages:scripts/,
+          /lint:packages:styles/,
+          /test:packages/,
+        ],
         files: ['./package.json'],
       },
     ]

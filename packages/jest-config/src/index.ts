@@ -14,7 +14,14 @@ const jestConfig: JestConfig = {
       lines: 80,
     },
   },
+  /**
+   * clearing all mocks before each individual test (useful when using spy functions)
+   */
   clearMocks: true,
+  /**
+   * resetting all modules before each individual test (useful when using dynamic imports functions)
+   */
+  resetModules: true,
   /**
    * Using this testRegex because tests should be in a different folder but not alongside to source code it is more meaningful
    */

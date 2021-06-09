@@ -1,9 +1,16 @@
 import path from 'path'
 import { readFileSync, existsSync } from 'fs'
+import get from 'lodash.get'
 import { parse } from 'dotenv'
 import { CodeGenConfig } from '../types'
 
-const envFilePath = path.join(process.cwd(), `./.env.${process.env.NODE_ENV}`)
+/**
+ * Using lodash.get because webpack for some reason replace process.env properties with values at build time even if wp mode is node
+ */
+const envFilePath = path.join(
+  process.cwd(),
+  `./.env.${get(process, 'env.NODE_ENV')}`,
+)
 /**
  * Using parse from dotenv instead of config because we don't want to override something from process.env
  */

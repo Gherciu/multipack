@@ -1,4 +1,4 @@
-export interface KnexConfig {
+export interface KnexConfigDbSettings {
   client: 'pg'
   connection: {
     user: string
@@ -6,6 +6,16 @@ export interface KnexConfig {
     password: string
     port: string
     database: string
+  }
+}
+
+export interface KnexConfig extends KnexConfigDbSettings {
+  production: KnexConfigDbSettings
+  test: {
+    client: 'sqlite3'
+    connection: {
+      filename: string
+    }
   }
   migrations?: {
     directory?: string

@@ -224,6 +224,17 @@ const { codeGenConfig } = require('@episclera/multipack')
 module.exports = codeGenConfig
 ```
 
+#### With Knex
+
+In your `knexfile.js` file just put this content.
+
+```js
+const { knexConfig } = require('@episclera/multipack')
+// OR install and import just what you need separately: const knexConfig = require('@episclera/knex-config')
+
+module.exports = knexConfig
+```
+
 ## Contributing
 
 1. Fork it!

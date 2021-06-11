@@ -14,6 +14,7 @@ import nextConfig from '@episclera/next-config'
 import nextI18NextConfig from '@episclera/next-i18next-config'
 import lintStagedConfig from '@episclera/lint-staged-config'
 import codeGenConfig from '@episclera/codegen-config'
+import knexConfig from '@episclera/knex-config'
 
 import { Multipack } from '../types'
 
@@ -42,6 +43,8 @@ const multipack: Multipack = {
   lintStagedConfig,
   // codegen
   codeGenConfig,
+  // knex
+  knexConfig,
   // utils
   mergeConfigs,
 }
@@ -71,6 +74,8 @@ export {
   lintStagedConfig,
   // codegen
   codeGenConfig,
+  // knex
+  knexConfig,
   // utils
   mergeConfigs,
 }

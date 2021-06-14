@@ -2,7 +2,6 @@ export interface PM2Config {
   apps: {
     name: string
     script: string
-    args: string
     max_memory_restart: string
     exp_backoff_restart_delay: number
   }[]

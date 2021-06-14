@@ -19,7 +19,7 @@ describe('pm2Config', () => {
     await remove(pkgFilePath)
   })
 
-  it('Should load package.json file and read from there necessary properties to build in the end correct "script args" for Next packages', async () => {
+  it('Should load package.json file and read from there necessary properties to build in the end correct "script" for Next packages', async () => {
     const pkgFilePath = path.join(__dirname, './package.json')
     const spyCwd = jest.spyOn(process, 'cwd')
     spyCwd.mockReturnValue(__dirname)
@@ -34,12 +34,12 @@ describe('pm2Config', () => {
     // Importing it dynamically because package.json file also is created dynamically in this test and it can't read it initially
     const pm2Config = await import('../index')
 
-    expect(pm2Config.default.apps[0].args).toBe('next start -p $PORT')
+    expect(pm2Config.default.apps[0].script).toBe('next start -p $PORT')
 
     await remove(pkgFilePath)
   })
 
-  it('Should load package.json file and read from there necessary properties to build in the end correct "script args" for Strapi packages', async () => {
+  it('Should load package.json file and read from there necessary properties to build in the end correct "script" for Strapi packages', async () => {
     const pkgFilePath = path.join(__dirname, './package.json')
     const spyCwd = jest.spyOn(process, 'cwd')
     spyCwd.mockReturnValue(__dirname)
@@ -54,12 +54,12 @@ describe('pm2Config', () => {
     // Importing it dynamically because package.json file also is created dynamically in this test and it can't read it initially
     const pm2Config = await import('../index')
 
-    expect(pm2Config.default.apps[0].args).toBe('strapi start')
+    expect(pm2Config.default.apps[0].script).toBe('strapi start')
 
     await remove(pkgFilePath)
   })
 
-  it('Should build in the end a placeholder "script args" if no Strapi or Next package found', async () => {
+  it('Should build in the end a placeholder "script" if no Strapi or Next package found', async () => {
     const pkgFilePath = path.join(__dirname, './package.json')
     const spyCwd = jest.spyOn(process, 'cwd')
     spyCwd.mockReturnValue(__dirname)
@@ -71,7 +71,7 @@ describe('pm2Config', () => {
     // Importing it dynamically because package.json file also is created dynamically in this test and it can't read it initially
     const pm2Config = await import('../index')
 
-    expect(pm2Config.default.apps[0].args).toMatch(
+    expect(pm2Config.default.apps[0].script).toMatch(
       'cowsay "No Next or Strapi package found. You should run PM2 only in root folders of Strapi or Next projects"',
     )
 

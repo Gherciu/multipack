@@ -20,11 +20,10 @@ const pm2Config: PM2Config = {
        * Using package name as a process name
        */
       name: pkg.name,
-      script: 'npx',
-      args:
+      script:
         (isNextPackage && 'next start -p $PORT') ||
         (isStrapiPackage && 'strapi start') ||
-        'cowsay "No Next or Strapi package found. You should run PM2 only in root folders of Strapi or Next projects"',
+        'npx cowsay "No Next or Strapi package found. You should run PM2 only in root folders of Strapi or Next projects"',
       /**
        * This value was chosen because t2.micro has 1GB memory limit https://aws.amazon.com/ec2/instance-types/t2/
        * but using the entire memory is not possible and correct because other processes also requires some memory

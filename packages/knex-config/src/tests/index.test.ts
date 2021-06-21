@@ -27,12 +27,15 @@ describe('knexConfig', () => {
     // Importing it dynamically because .env file also is created dynamically in this test and it can't read it initially
     const knexConfig = await import('../index')
 
-    expect(knexConfig.default.connection).toMatchObject({
-      host: 'localhost',
-      port: '5432',
-      user: 'localUser',
-      password: 'localPass',
-      database: 'localDB',
+    expect(knexConfig.default).toMatchObject({
+      client: 'pg',
+      connection: {
+        host: 'localhost',
+        port: '5432',
+        user: 'localUser',
+        password: 'localPass',
+        database: 'localDB',
+      },
     })
 
     await unlink(envFilePath)
@@ -50,12 +53,15 @@ describe('knexConfig', () => {
     // Importing it dynamically because .env file also is created dynamically in this test and it can't read it initially
     const knexConfig = await import('../index')
 
-    expect(knexConfig.default.connection).toMatchObject({
-      host: 'rds.aws.com',
-      port: '5432',
-      user: 'rdsUser',
-      password: 'rdsPassword',
-      database: 'rdsDB',
+    expect(knexConfig.default).toMatchObject({
+      client: 'pg',
+      connection: {
+        host: process.env.DATABASE_HOST,
+        port: process.env.DATABASE_PORT,
+        user: process.env.DATABASE_USERNAME,
+        password: process.env.DATABASE_PASSWORD,
+        database: process.env.DATABASE_NAME,
+      },
     })
     // clearing process env
     process.env.NODE_ENV = 'test'
@@ -76,9 +82,14 @@ describe('knexConfig', () => {
     // Importing it dynamically because .env file also is created dynamically in this test and it can't read it initially
     const knexConfig = await import('../index')
 
-    expect(knexConfig.default.connection).toMatchObject({
-      filename: path.join(process.cwd(), './tmp/db.sql'),
+    expect(knexConfig.default).toMatchObject({
+      client: 'sqlite3',
+      connection: {
+        filename: path.join(process.cwd(), './tmp/db.sql'),
+      },
+      useNullAsDefault: true,
     })
+
     await unlink(envFilePath)
   })
 })

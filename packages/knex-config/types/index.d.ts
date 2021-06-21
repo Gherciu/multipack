@@ -11,12 +11,17 @@ export interface KnexConfig {
     | {
         filename: string
       }
+
   migrations: {
     directory: string
   }
   seeds: {
     directory: string
   }
+  /**
+   * Basically needed for sqlite because it can't insert values as defaults
+   */
+  useNullAsDefault?: boolean
 }
 
 // package exports

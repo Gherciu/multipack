@@ -72,6 +72,12 @@ const knexConfig: KnexConfig = {
   seeds: {
     directory: path.join(process.cwd(), './db/seeds'),
   },
+  /**
+   * Basically needed for sqlite because it can't insert values as defaults
+   */
+  ...(get(process, 'env.NODE_ENV') === 'test'
+    ? { useNullAsDefault: true }
+    : {}),
 }
 
 export default knexConfig

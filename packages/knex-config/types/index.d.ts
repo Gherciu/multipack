@@ -1,16 +1,18 @@
+export interface PGConnection {
+  user: string
+  host: string
+  password: string
+  port: string
+  database: string
+}
+
+export interface SQLiteConnection {
+  filename: string
+}
+
 export interface KnexConfig {
   client: 'pg' | 'sqlite3'
-  connection:
-    | {
-        user: string
-        host: string
-        password: string
-        port: string
-        database: string
-      }
-    | {
-        filename: string
-      }
+  connection: PGConnection | SQLiteConnection
   /**
    * Basically needed for sqlite because it can't insert values as defaults
    */

@@ -22,6 +22,8 @@ describe('knexConfig', () => {
       'DATABASE_HOST = localhost\nDATABASE_PORT = 5432\nDATABASE_USERNAME = localUser\nDATABASE_PASSWORD = localPass\nDATABASE_NAME = localDB',
     )
 
+    process.env.NODE_ENV = 'development'
+
     // Importing it dynamically because .env file also is created dynamically in this test and it can't read it initially
     const knexConfig = await import('../index')
 
@@ -32,7 +34,36 @@ describe('knexConfig', () => {
       password: 'localPass',
       database: 'localDB',
     })
+
     await unlink(envFilePath)
+    process.env.NODE_ENV = 'test'
+  })
+
+  it('Should use process.env to build in the end correct "production" db connection', async () => {
+    process.env.NODE_ENV = 'production'
+    process.env.DATABASE_HOST = 'rds.aws.com'
+    process.env.DATABASE_PORT = '5432'
+    process.env.DATABASE_USERNAME = 'rdsUser'
+    process.env.DATABASE_PASSWORD = 'rdsPassword'
+    process.env.DATABASE_NAME = 'rdsDB'
+
+    // Importing it dynamically because .env file also is created dynamically in this test and it can't read it initially
+    const knexConfig = await import('../index')
+
+    expect(knexConfig.default.connection).toMatchObject({
+      host: 'rds.aws.com',
+      port: '5432',
+      user: 'rdsUser',
+      password: 'rdsPassword',
+      database: 'rdsDB',
+    })
+    // clearing process env
+    process.env.NODE_ENV = 'test'
+    process.env.DATABASE_HOST = undefined
+    process.env.DATABASE_PORT = undefined
+    process.env.DATABASE_USERNAME = undefined
+    process.env.DATABASE_PASSWORD = undefined
+    process.env.DATABASE_NAME = undefined
   })
 
   it('Should load .env.test file and read from there necessary properties to build in the end correct "test" db connection', async () => {
@@ -45,33 +76,9 @@ describe('knexConfig', () => {
     // Importing it dynamically because .env file also is created dynamically in this test and it can't read it initially
     const knexConfig = await import('../index')
 
-    expect(knexConfig.default.test.connection).toMatchObject({
-      filename: './tmp/db.sql',
+    expect(knexConfig.default.connection).toMatchObject({
+      filename: path.join(process.cwd(), './tmp/db.sql'),
     })
     await unlink(envFilePath)
-  })
-  it('Should use process.env to build in the end correct "production" db connection', async () => {
-    process.env.DATABASE_HOST = 'rds.aws.com'
-    process.env.DATABASE_PORT = '5432'
-    process.env.DATABASE_USERNAME = 'rdsUser'
-    process.env.DATABASE_PASSWORD = 'rdsPassword'
-    process.env.DATABASE_NAME = 'rdsDB'
-
-    // Importing it dynamically because .env file also is created dynamically in this test and it can't read it initially
-    const knexConfig = await import('../index')
-
-    expect(knexConfig.default.production.connection).toMatchObject({
-      host: 'rds.aws.com',
-      port: '5432',
-      user: 'rdsUser',
-      password: 'rdsPassword',
-      database: 'rdsDB',
-    })
-    // clearing process env
-    process.env.DATABASE_HOST = undefined
-    process.env.DATABASE_PORT = undefined
-    process.env.DATABASE_USERNAME = undefined
-    process.env.DATABASE_PASSWORD = undefined
-    process.env.DATABASE_NAME = undefined
   })
 })

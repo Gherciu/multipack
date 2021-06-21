@@ -1,9 +1,20 @@
 import path from 'path'
-import { writeFile, unlink } from 'fs/promises'
+import { writeFile, unlink, access } from 'fs/promises'
+
+const envFilePath = path.join(__dirname, `./.env.${process.env.NODE_ENV}`)
+
+afterEach(async () => {
+  const envExists = await access(envFilePath)
+    .then(() => true)
+    .catch(() => false)
+
+  if (envExists) {
+    await unlink(envFilePath)
+  }
+})
 
 describe('codeGenConfig', () => {
   it('Should load .env file depending on NODE_ENV and read from there necessary properties to build in the end correct schema url if is a Next like project', async () => {
-    const envFilePath = path.join(__dirname, `./.env.${process.env.NODE_ENV}`)
     const spyCwd = jest.spyOn(process, 'cwd')
     spyCwd.mockReturnValue(__dirname)
 
@@ -16,11 +27,9 @@ describe('codeGenConfig', () => {
     const codeGenConfig = await import('../index')
 
     expect(codeGenConfig.default.schema).toBe('https://api.example.com/graphql')
-    await unlink(envFilePath)
   })
 
   it('Should load .env file depending on NODE_ENV and read from there necessary properties to build in the end correct schema url if is a Strapi like project', async () => {
-    const envFilePath = path.join(__dirname, `./.env.${process.env.NODE_ENV}`)
     const spyCwd = jest.spyOn(process, 'cwd')
     spyCwd.mockReturnValue(__dirname)
 
@@ -30,7 +39,6 @@ describe('codeGenConfig', () => {
     const codeGenConfig = await import('../index')
 
     expect(codeGenConfig.default.schema).toBe('http://localhost:3005/graphql')
-    await unlink(envFilePath)
   })
 
   it('Should not throw errors if .env file are not found', async () => {

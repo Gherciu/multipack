@@ -59,10 +59,12 @@ const knexConfig: KnexConfig = {
            * otherwise it will generate each time a new DB name
            * that's needed because sqlite connection is used only in tests and there exists a
            * possibility that one test can DROP the DB and another will fail due to this fact
+           *
+           * Note: Knex only can create DB files in existing directories
            */
           filename: path.join(
             process.cwd(),
-            parsedEnvs.DATABASE_FILENAME || `./tmp/${+new Date()}_test_db.sql`,
+            parsedEnvs.DATABASE_FILENAME || `./${+new Date()}_test_db.sql`,
           ),
         },
   /**

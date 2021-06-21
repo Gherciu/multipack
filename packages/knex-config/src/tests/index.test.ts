@@ -100,7 +100,7 @@ describe('knexConfig', () => {
     const spyCwd = jest.spyOn(process, 'cwd')
     spyCwd.mockReturnValue(__dirname)
 
-    await writeFile(envFilePath, 'DATABASE_FILENAME = ./tmp/db.sql')
+    await writeFile(envFilePath, 'DATABASE_FILENAME = ./db.sql')
 
     // Importing it dynamically because .env file also is created dynamically in this test and it can't read it initially
     const knexConfig = await import('../index')
@@ -108,7 +108,7 @@ describe('knexConfig', () => {
     expect(knexConfig.default).toMatchObject({
       client: 'sqlite3',
       connection: {
-        filename: path.join(process.cwd(), './tmp/db.sql'),
+        filename: path.join(process.cwd(), './db.sql'),
       },
       useNullAsDefault: true,
     })

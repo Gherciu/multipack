@@ -65,12 +65,6 @@ const knexConfig: KnexConfig = {
             parsedEnvs.DATABASE_FILENAME || `./tmp/${+new Date()}_test_db.sql`,
           ),
         },
-  migrations: {
-    directory: path.join(process.cwd(), './db/migrations'),
-  },
-  seeds: {
-    directory: path.join(process.cwd(), './db/seeds'),
-  },
   /**
    * Basically needed for sqlite because it can't insert values as defaults
    */

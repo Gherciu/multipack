@@ -6,11 +6,11 @@ import { KnexConfig } from '../types'
 
 /**
  * Using lodash.get because webpack for some reason replace process.env properties with values at build time even if wp mode is node
+ *
+ * Default fallback to development .env
  */
-const envFilePath = path.join(
-  process.cwd(),
-  `./.env.${get(process, 'env.NODE_ENV')}`,
-)
+const processNodeEnv = get(process, 'env.NODE_ENV', 'development') as string
+const envFilePath = path.join(process.cwd(), `./.env.${processNodeEnv}`)
 /**
  * Using parse from dotenv instead of config because we don't want to override something from process.env
  */
@@ -23,10 +23,9 @@ const knexConfig: KnexConfig = {
    * In development and production mode are used pg connection
    * In test mode are used sqlite 3 to be possible to create and delete db on each test run
    */
-  client:
-    (get(process, 'env.NODE_ENV') as string) !== 'test' ? 'pg' : 'sqlite3',
+  client: processNodeEnv !== 'test' ? 'pg' : 'sqlite3',
   connection:
-    (get(process, 'env.NODE_ENV') as string) !== 'test'
+    processNodeEnv !== 'test'
       ? {
           host: get(
             process,
@@ -75,9 +74,7 @@ const knexConfig: KnexConfig = {
   /**
    * Basically needed for sqlite because it can't insert values as defaults
    */
-  ...(get(process, 'env.NODE_ENV') === 'test'
-    ? { useNullAsDefault: true }
-    : {}),
+  ...(processNodeEnv === 'test' ? { useNullAsDefault: true } : {}),
 }
 
 export default knexConfig

@@ -1,5 +1,34 @@
 import path from 'path'
-import { writeFile, unlink } from 'fs/promises'
+import { writeFile, unlink, access } from 'fs/promises'
+
+const envFilePath = path.join(__dirname, `./.env.${process.env.NODE_ENV}`)
+const devEnvFilePath = path.join(__dirname, './.env.development')
+
+afterEach(async () => {
+  const envExists = await access(envFilePath)
+    .then(() => true)
+    .catch(() => false)
+  const devEnvExists = await access(devEnvFilePath)
+    .then(() => true)
+    .catch(() => false)
+
+  /**
+   * Removing created files on tests running
+   */
+  if (envExists) {
+    await unlink(envFilePath)
+  }
+
+  if (devEnvExists) {
+    await unlink(devEnvFilePath)
+  }
+
+  /**
+   * back to test env because practically all tests are mutating NODE_ENV
+   * and that can affect other tests
+   */
+  process.env.NODE_ENV = 'test'
+})
 
 describe('knexConfig', () => {
   it('Should not throw errors if .env file are not found', async () => {
@@ -12,17 +41,16 @@ describe('knexConfig', () => {
     expect(knexConfig.default).toBeTruthy()
   })
 
-  it('Should load .env.development file and read from there necessary properties to build in the end correct "default/development" db connection', async () => {
-    const envFilePath = path.join(__dirname, './.env.development')
+  it('Should use development .env file if process.NODE_ENV is not present', async () => {
     const spyCwd = jest.spyOn(process, 'cwd')
     spyCwd.mockReturnValue(__dirname)
 
     await writeFile(
-      envFilePath,
+      devEnvFilePath,
       'DATABASE_HOST = localhost\nDATABASE_PORT = 5432\nDATABASE_USERNAME = localUser\nDATABASE_PASSWORD = localPass\nDATABASE_NAME = localDB',
     )
 
-    process.env.NODE_ENV = 'development'
+    delete process.env.NODE_ENV
 
     // Importing it dynamically because .env file also is created dynamically in this test and it can't read it initially
     const knexConfig = await import('../index')
@@ -37,9 +65,6 @@ describe('knexConfig', () => {
         database: 'localDB',
       },
     })
-
-    await unlink(envFilePath)
-    process.env.NODE_ENV = 'test'
   })
 
   it('Should use process.env to build in the end correct "production" db connection', async () => {
@@ -64,7 +89,6 @@ describe('knexConfig', () => {
       },
     })
     // clearing process env
-    process.env.NODE_ENV = 'test'
     process.env.DATABASE_HOST = undefined
     process.env.DATABASE_PORT = undefined
     process.env.DATABASE_USERNAME = undefined
@@ -73,7 +97,6 @@ describe('knexConfig', () => {
   })
 
   it('Should load .env.test file and read from there necessary properties to build in the end correct "test" db connection', async () => {
-    const envFilePath = path.join(__dirname, './.env.test')
     const spyCwd = jest.spyOn(process, 'cwd')
     spyCwd.mockReturnValue(__dirname)
 
@@ -89,7 +112,5 @@ describe('knexConfig', () => {
       },
       useNullAsDefault: true,
     })
-
-    await unlink(envFilePath)
   })
 })

@@ -2,15 +2,32 @@ import path from 'path'
 import { writeFile, unlink, access } from 'fs/promises'
 
 const envFilePath = path.join(__dirname, `./.env.${process.env.NODE_ENV}`)
+const devEnvFilePath = path.join(__dirname, `./.env.development`)
 
 afterEach(async () => {
   const envExists = await access(envFilePath)
     .then(() => true)
     .catch(() => false)
+  const devEnvExists = await access(devEnvFilePath)
+    .then(() => true)
+    .catch(() => false)
 
+  /**
+   * Removing created files on tests running
+   */
   if (envExists) {
     await unlink(envFilePath)
   }
+
+  if (devEnvExists) {
+    await unlink(devEnvFilePath)
+  }
+
+  /**
+   * back to test env because practically all tests are mutating NODE_ENV
+   * and that can affect other tests
+   */
+  process.env.NODE_ENV = 'test'
 })
 
 describe('codeGenConfig', () => {
@@ -22,6 +39,23 @@ describe('codeGenConfig', () => {
       envFilePath,
       'NEXT_PUBLIC_API_URL = https://api.example.com',
     )
+
+    // Importing it dynamically because .env file also is created dynamically in this test and it can't read it initially
+    const codeGenConfig = await import('../index')
+
+    expect(codeGenConfig.default.schema).toBe('https://api.example.com/graphql')
+  })
+
+  it('Should use development .env file if process.NODE_ENV is not present', async () => {
+    const spyCwd = jest.spyOn(process, 'cwd')
+    spyCwd.mockReturnValue(__dirname)
+
+    await writeFile(
+      devEnvFilePath,
+      'NEXT_PUBLIC_API_URL = https://api.example.com',
+    )
+
+    delete process.env.NODE_ENV
 
     // Importing it dynamically because .env file also is created dynamically in this test and it can't read it initially
     const codeGenConfig = await import('../index')

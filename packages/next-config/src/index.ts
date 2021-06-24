@@ -20,15 +20,6 @@ const nextConfig: NextConfig = (plugins = [], config = {}) => {
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                 ...(nextWebpackConfig?.module?.rules || []),
                 {
-                  test: /.(jpeg|png|webp|gif|ico|mp4|mp3)$/,
-                  loader: 'file-loader',
-                  options: {
-                    name: '[name]-[hash].[ext]',
-                    publicPath: '/_next/static',
-                    outputPath: 'static',
-                  },
-                },
-                {
                   test: /.svg$/,
                   use: [
                     {

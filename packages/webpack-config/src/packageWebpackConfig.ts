@@ -13,7 +13,7 @@ const packageWebpackConfig: WebpackConfigPart = {
     /**
      * Don't bundling these packages because these packages will be used as a peerDependencies and
      * imported from the client which should install these by himself.
-     * 
+     *
      * Thats needed to avoid multiple versions of these packages in the same client bundle.
      */
     react: 'react',

@@ -31,6 +31,20 @@ afterEach(async () => {
 })
 
 describe('codeGenConfig', () => {
+  it('Should contain custom scalars definitions for "any" typed scalars because "any" typed scalars can throw in the projects where they are used some TS errors about inconsistent typings', async () => {
+    // Importing it dynamically because .env file also is created dynamically in this test and it can't read it initially
+    const codeGenConfig = await import('../index')
+
+    expect(codeGenConfig.default.config.scalars).toMatchObject({
+      JSON: 'Record<string, any>',
+      Date: 'string',
+      DateTime: 'string',
+      Time: 'string',
+      Long: 'number',
+      Upload: 'File',
+    })
+  })
+
   it('Should load .env file depending on NODE_ENV and read from there necessary properties to build in the end correct schema url if is a Next like project', async () => {
     const spyCwd = jest.spyOn(process, 'cwd')
     spyCwd.mockReturnValue(__dirname)

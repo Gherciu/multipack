@@ -1,7 +1,13 @@
 export interface CodeGenConfig {
   schema: string
   generates: {
-    './api-types.d.ts': { [key: string]: any }
+    /**
+     * Hardcoded filename enum type to ensure that file name will be not changed
+     */
+    './api-types.d.ts': Record<string, any>
+  }
+  config: {
+    scalars: Record<string, string>
   }
 }
 

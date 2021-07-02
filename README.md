@@ -119,7 +119,7 @@ In your `lint-staged.config.js` file just put this content.
 
 ```js
 const { lintStagedConfig } = require('@episclera/multipack')
-// OR install and import just what you need separately: const lintStagedConfig = require('@episclera/next-i18next-config')
+// OR install and import just what you need separately: const lintStagedConfig = require('@episclera/lint-staged-config')
 
 module.exports = lintStagedConfig
 ```

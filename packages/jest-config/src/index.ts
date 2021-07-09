@@ -27,6 +27,12 @@ const jestConfig: JestConfig = {
    */
   testRegex: 'tests/.*\\.test\\.(ts|tsx)$',
   preset: 'ts-jest',
+  /**
+   * From version 27 the default testEnvironment is "node" but not "jsdom" which makes a lot of projects generated from multipack to fail in test step
+   * because most projects even "node" related depends on some DOM methods
+   * See more info https://jestjs.io/blog/2021/05/25/jest-27#flipping-defaults
+   */
+  testEnvironment: 'jsdom',
 }
 
 export default jestConfig

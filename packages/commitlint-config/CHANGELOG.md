@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.37.2 (2021-09-19)
+
+**Note:** Version bump only for package @episclera/commitlint-config
+
+
+
+
+
 ## 1.37.1 (2021-07-31)
 
 

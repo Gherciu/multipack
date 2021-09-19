@@ -1,7 +1,7 @@
 {
   "name": "@episclera/webpack-config",
   "description": "A shareable webpack config.",
-  "version": "1.37.1",
+  "version": "1.37.2",
   "license": "MIT",
   "publishConfig": {
     "access": "public"

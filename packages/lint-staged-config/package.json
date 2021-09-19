@@ -1,7 +1,7 @@
 {
   "name": "@episclera/lint-staged-config",
   "description": "A shareable lint-staged config.",
-  "version": "1.29.1",
+  "version": "1.29.2",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -39,8 +39,8 @@
     "postinstall": "opencollective-postinstall || exit 0"
   },
   "devDependencies": {
-    "@episclera/multipack-utils": "^5.34.1",
-    "@episclera/webpack-config": "^1.37.1",
+    "@episclera/multipack-utils": "^5.34.2",
+    "@episclera/webpack-config": "^1.37.2",
     "cross-env": "7.0.3",
     "rimraf": "3.0.2",
     "ts-loader": "9.2.5",
